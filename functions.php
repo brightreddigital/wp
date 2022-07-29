@@ -217,13 +217,23 @@ if( function_exists('acf_add_options_page') ) {
 
 	/* Change Site Title */
 
-	$value = get_field('site_title', 'option');		
+	$sitetitle = get_field('site_title', 'option');		
 	
 	if ($value) {
-		update_option('blogname', $value);
+		update_option('blogname', $sitetitle);
 	} else {
 		update_option( 'blogname', '' );	
 	}
+
+	$tagline = get_field('tagline', 'option');		
+	
+	if ($value) {
+		update_option('blogname', $tagline);
+	} else {
+		update_option( 'blogname', '' );	
+	}
+
+
 	
 }
 
