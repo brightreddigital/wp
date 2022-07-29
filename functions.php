@@ -228,9 +228,9 @@ if( function_exists('acf_add_options_page') ) {
 	$tagline = get_field('tagline', 'option');		
 	
 	if ($value) {
-		update_option('blogname', $tagline);
+		update_option('blogdescription', $tagline);
 	} else {
-		update_option( 'blogname', '' );	
+		update_option( 'blogdescription', '' );	
 	}
 
 
