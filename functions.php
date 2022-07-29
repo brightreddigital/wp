@@ -193,6 +193,8 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 if( function_exists('acf_add_options_page') ) {
 	
+	/* Add theme options pages */
+
 	acf_add_options_page(array(
 		'page_title' 	=> 'Theme General Settings',
 		'menu_title'	=> 'Theme Settings',
@@ -212,5 +214,22 @@ if( function_exists('acf_add_options_page') ) {
 		'menu_title'	=> 'Footer',
 		'parent_slug'	=> 'theme-general-settings',
 	));
+
+	/* Change Site Title */
+
+	$value = get_field('site_title', 'option');		
+	
+	if ($value) {
+		update_option('blogname', $value);
+	} else {
+		update_option( 'blogname', '' );	
+	}
 	
 }
+
+/* Add Woocommerce support */
+
+add_action( 'after_setup_theme', 'woocommerce_support' );
+function woocommerce_support() {
+	add_theme_support( 'woocommerce' );
+} 

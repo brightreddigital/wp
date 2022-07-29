@@ -22,8 +22,6 @@
 
 		<?php the_content(); ?>
 
-		<?php the_field('h1_font', 'option');?>
-
 	</main><!-- #main -->
 
 	<?php get_footer(); ?>
