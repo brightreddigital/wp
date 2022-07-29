@@ -4,7 +4,7 @@
  *
  * @link https://jetpack.com/
  *
- * @package Bright_Red
+ * @package brightred
  */
 
 /**
@@ -14,13 +14,13 @@
  * See: https://jetpack.com/support/responsive-videos/
  * See: https://jetpack.com/support/content-options/
  */
-function bright_red_jetpack_setup() {
+function brightred_jetpack_setup() {
 	// Add theme support for Infinite Scroll.
 	add_theme_support(
 		'infinite-scroll',
 		array(
 			'container' => 'main',
-			'render'    => 'bright_red_infinite_scroll_render',
+			'render'    => 'brightred_infinite_scroll_render',
 			'footer'    => 'page',
 		)
 	);
@@ -33,7 +33,7 @@ function bright_red_jetpack_setup() {
 		'jetpack-content-options',
 		array(
 			'post-details' => array(
-				'stylesheet' => 'bright-red-style',
+				'stylesheet' => 'brightred-style',
 				'date'       => '.posted-on',
 				'categories' => '.cat-links',
 				'tags'       => '.tags-links',
@@ -48,13 +48,13 @@ function bright_red_jetpack_setup() {
 		)
 	);
 }
-add_action( 'after_setup_theme', 'bright_red_jetpack_setup' );
+add_action( 'after_setup_theme', 'brightred_jetpack_setup' );
 
-if ( ! function_exists( 'bright_red_infinite_scroll_render' ) ) :
+if ( ! function_exists( 'brightred_infinite_scroll_render' ) ) :
 	/**
 	 * Custom render function for Infinite Scroll.
 	 */
-	function bright_red_infinite_scroll_render() {
+	function brightred_infinite_scroll_render() {
 		while ( have_posts() ) {
 			the_post();
 			if ( is_search() ) :

@@ -6,23 +6,23 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Bright_Red
+ * @package brightred
  */
 
 ?>
 
 	<footer id="colophon" class="site-footer">
 		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'bright-red' ) ); ?>">
+			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'brightred' ) ); ?>">
 				<?php
 				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'bright-red' ), 'WordPress' );
+				printf( esc_html__( 'Proudly powered by %s', 'brightred' ), 'WordPress' );
 				?>
 			</a>
 			<span class="sep"> | </span>
 				<?php
 				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'bright-red' ), 'bright-red', '<a href="http://underscores.me/">Underscores.me</a>' );
+				printf( esc_html__( 'Theme: %1$s by %2$s.', 'brightred' ), 'brightred', '<a href="http://underscores.me/">Underscores.me</a>' );
 				?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->

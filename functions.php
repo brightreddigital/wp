@@ -1,10 +1,10 @@
 <?php
 /**
- * Bright Red functions and definitions
+ * brightred functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package Bright_Red
+ * @package brightred
  */
 
 if ( ! defined( '_S_VERSION' ) ) {
@@ -19,14 +19,14 @@ if ( ! defined( '_S_VERSION' ) ) {
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-function bright_red_setup() {
+function brightred_setup() {
 	/*
 		* Make theme available for translation.
 		* Translations can be filed in the /languages/ directory.
-		* If you're building a theme based on Bright Red, use a find and replace
-		* to change 'bright-red' to the name of your theme in all the template files.
+		* If you're building a theme based on brightred, use a find and replace
+		* to change 'brightred' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain( 'bright-red', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'brightred', get_template_directory() . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -49,7 +49,7 @@ function bright_red_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'bright-red' ),
+			'menu-1' => esc_html__( 'Primary', 'brightred' ),
 		)
 	);
 
@@ -74,7 +74,7 @@ function bright_red_setup() {
 	add_theme_support(
 		'custom-background',
 		apply_filters(
-			'bright_red_custom_background_args',
+			'brightred_custom_background_args',
 			array(
 				'default-color' => 'ffffff',
 				'default-image' => '',
@@ -100,7 +100,7 @@ function bright_red_setup() {
 		)
 	);
 }
-add_action( 'after_setup_theme', 'bright_red_setup' );
+add_action( 'after_setup_theme', 'brightred_setup' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -109,22 +109,22 @@ add_action( 'after_setup_theme', 'bright_red_setup' );
  *
  * @global int $content_width
  */
-function bright_red_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'bright_red_content_width', 640 );
+function brightred_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'brightred_content_width', 640 );
 }
-add_action( 'after_setup_theme', 'bright_red_content_width', 0 );
+add_action( 'after_setup_theme', 'brightred_content_width', 0 );
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function bright_red_widgets_init() {
+function brightred_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', 'bright-red' ),
+			'name'          => esc_html__( 'Sidebar', 'brightred' ),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'bright-red' ),
+			'description'   => esc_html__( 'Add widgets here.', 'brightred' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -132,22 +132,35 @@ function bright_red_widgets_init() {
 		)
 	);
 }
-add_action( 'widgets_init', 'bright_red_widgets_init' );
+add_action( 'widgets_init', 'brightred_widgets_init' );
+
+/* Parse style variables */
+
+function generate_options_css() {
+    $ss_dir = get_stylesheet_directory();
+    ob_start(); // Capture all output into buffer
+    require($ss_dir . '/inc/style-vars.php'); // Grab the custom-style.php file
+    $css = ob_get_clean(); // Store output in a variable, then flush the buffer
+    file_put_contents($ss_dir . '/var/style-vars.css', $css, LOCK_EX); // Save it as a css file
+}
+add_action( 'acf/save_post', 'generate_options_css', 20 ); //Parse the output and write the CSS file on post save
+
 
 /**
  * Enqueue scripts and styles.
  */
-function bright_red_scripts() {
-	wp_enqueue_style( 'bright-red-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'bright-red-style', 'rtl', 'replace' );
+function brightred_scripts() {
+	wp_enqueue_style( 'style-variables', get_template_directory_uri() . '/var/style-vars.css' );
+	wp_enqueue_style( 'brightred-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_style_add_data( 'brightred-style', 'rtl', 'replace' );
 
-	wp_enqueue_script( 'bright-red-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'brightred-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'bright_red_scripts' );
+add_action( 'wp_enqueue_scripts', 'brightred_scripts' );
 
 /**
  * Implement the Custom Header feature.
@@ -176,3 +189,28 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/* Theme options */
+
+if( function_exists('acf_add_options_page') ) {
+	
+	acf_add_options_page(array(
+		'page_title' 	=> 'Theme General Settings',
+		'menu_title'	=> 'Theme Settings',
+		'menu_slug' 	=> 'theme-general-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+	
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Theme Typography Settings',
+		'menu_title'	=> 'Typography',
+		'parent_slug'	=> 'theme-general-settings',
+	));
+	
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Theme Footer Settings',
+		'menu_title'	=> 'Footer',
+		'parent_slug'	=> 'theme-general-settings',
+	));
+	
+}

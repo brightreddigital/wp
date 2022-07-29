@@ -9,7 +9,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Bright_Red
+ * @package brightred
  */
 
 get_header();

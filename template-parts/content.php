@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Bright_Red
+ * @package brightred
  */
 
 ?>
@@ -22,14 +22,14 @@
 			?>
 			<div class="entry-meta">
 				<?php
-				bright_red_posted_on();
-				bright_red_posted_by();
+				brightred_posted_on();
+				brightred_posted_by();
 				?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php bright_red_post_thumbnail(); ?>
+	<?php brightred_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
@@ -37,7 +37,7 @@
 			sprintf(
 				wp_kses(
 					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'bright-red' ),
+					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'brightred' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -50,7 +50,7 @@
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'bright-red' ),
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'brightred' ),
 				'after'  => '</div>',
 			)
 		);
@@ -58,6 +58,6 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php bright_red_entry_footer(); ?>
+		<?php brightred_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

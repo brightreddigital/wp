@@ -7,7 +7,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Bright_Red
+ * @package brightred
  */
 
 /*
@@ -28,18 +28,18 @@ if ( post_password_required() ) {
 		?>
 		<h2 class="comments-title">
 			<?php
-			$bright_red_comment_count = get_comments_number();
-			if ( '1' === $bright_red_comment_count ) {
+			$brightred_comment_count = get_comments_number();
+			if ( '1' === $brightred_comment_count ) {
 				printf(
 					/* translators: 1: title. */
-					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'bright-red' ),
+					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'brightred' ),
 					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
 				);
 			} else {
 				printf( 
 					/* translators: 1: comment count number, 2: title. */
-					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $bright_red_comment_count, 'comments title', 'bright-red' ) ),
-					number_format_i18n( $bright_red_comment_count ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $brightred_comment_count, 'comments title', 'brightred' ) ),
+					number_format_i18n( $brightred_comment_count ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
 				);
 			}
@@ -65,7 +65,7 @@ if ( post_password_required() ) {
 		// If comments are closed and there are comments, let's leave a little note, shall we?
 		if ( ! comments_open() ) :
 			?>
-			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'bright-red' ); ?></p>
+			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'brightred' ); ?></p>
 			<?php
 		endif;
 
