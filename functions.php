@@ -141,7 +141,7 @@ function generate_options_css() {
     ob_start(); // Capture all output into buffer
     require($ss_dir . '/inc/style-vars.php'); // Grab the custom-style.php file
     $css = ob_get_clean(); // Store output in a variable, then flush the buffer
-    file_put_contents($ss_dir . '/var/style-vars.css', $css, LOCK_EX); // Save it as a css file
+    file_put_contents($ss_dir . '/inc/style-vars.css', $css, LOCK_EX); // Save it as a css file
 }
 add_action( 'acf/save_post', 'generate_options_css', 20 ); //Parse the output and write the CSS file on post save
 
@@ -150,7 +150,7 @@ add_action( 'acf/save_post', 'generate_options_css', 20 ); //Parse the output an
  * Enqueue scripts and styles.
  */
 function brightred_scripts() {
-	wp_enqueue_style( 'style-variables', get_template_directory_uri() . '/var/style-vars.css' );
+	wp_enqueue_style( 'style-variables', get_template_directory_uri() . '/inc/style-vars.css' );
 	wp_enqueue_style( 'brightred-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'brightred-style', 'rtl', 'replace' );
 
