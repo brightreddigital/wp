@@ -17,11 +17,11 @@ N.B. This stylesheet is for Bright Red Theme only. Individual site content css c
 =============== */
 
 @import var(--import);
-@import 'inc/css/reset.css';
-@import 'inc/css/typography.css';
-@import 'inc/css/buttons.css';
-@import 'inc/css/icons.css';
-@import 'inc/css/forms.css';
+@import 'inc/css/global/reset.css';
+@import 'inc/css/global/typography.css';
+@import 'inc/css/global/buttons.css';
+@import 'inc/css/global/icons.css';
+@import 'inc/css/global/forms.css';
 
 /* Option Styles */
 

@@ -43,13 +43,9 @@ Shop Styles
 	text-align: center !important;
 }
 
-.shopengine-archive-mode-grid .shopengine_add_to_list_action, .shopengine-archive-mode-grid .add_to_cart_button {
+.products li.product .add_to_cart_button {
 	display: none !important;
 }
-
-/*.products li.product .add_to_cart_button {
-	display: none !important;
-}*/
 
 .products .onsale {
 	background-color: var(--primary-colour) !important;

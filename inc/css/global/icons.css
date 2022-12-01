@@ -7,14 +7,14 @@
 }
 
 .social-icons li {
-	height: 45px;
-	width: 45px;
+	height: 35px;
+	width: 35px;
 	padding: 10px;
 	display: flex;
 	background-color: var(--primary-colour);
 	border-radius: 50%;
 	cursor: pointer !important;
-	margin-left: 5px;
+	margin-left: 10px;
 	position: relative;
 }
 

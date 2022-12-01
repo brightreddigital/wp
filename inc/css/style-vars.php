@@ -40,3 +40,6 @@
 
 }
 
+@import 'inc/css/themes/straight-laced.css';
+
+

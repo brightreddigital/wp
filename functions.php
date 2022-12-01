@@ -114,34 +114,14 @@ function brightred_content_width() {
 }
 add_action( 'after_setup_theme', 'brightred_content_width', 0 );
 
-/**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
-function brightred_widgets_init() {
-	register_sidebar(
-		array(
-			'name'          => esc_html__( 'Sidebar', 'brightred' ),
-			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'brightred' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-}
-add_action( 'widgets_init', 'brightred_widgets_init' );
-
 /* Parse style variables */
 
 function generate_options_css() {
     $ss_dir = get_stylesheet_directory();
     ob_start(); // Capture all output into buffer
-    require($ss_dir . '/inc/style-vars.php'); // Grab the custom-style.php file
+    require($ss_dir . '/inc/css/style-vars.php'); // Grab the custom-style.php file
     $css = ob_get_clean(); // Store output in a variable, then flush the buffer
-    file_put_contents($ss_dir . '/inc/style-vars.css', $css, LOCK_EX); // Save it as a css file
+    file_put_contents($ss_dir . '/inc/css/style-vars.css', $css, LOCK_EX); // Save it as a css file
 }
 add_action( 'acf/save_post', 'generate_options_css', 20 ); //Parse the output and write the CSS file on post save
 
@@ -150,11 +130,12 @@ add_action( 'acf/save_post', 'generate_options_css', 20 ); //Parse the output an
  * Enqueue scripts and styles.
  */
 function brightred_scripts() {
-	wp_enqueue_style( 'style-variables', get_template_directory_uri() . '/inc/style-vars.css' );
+	
+	wp_enqueue_style( 'style-variables', get_template_directory_uri() . '/inc/css/style-vars.css' );
+	
 	wp_enqueue_style( 'brightred-style', get_stylesheet_uri(), array(), _S_VERSION );
+	
 	wp_style_add_data( 'brightred-style', 'rtl', 'replace' );
-
-	// wp_enqueue_script( 'brightred-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
 	wp_enqueue_script( 'brightred-theme-style', get_template_directory_uri() . '/js/theme.js', array(), _S_VERSION, true );
 
@@ -164,36 +145,19 @@ function brightred_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'brightred_scripts' );
 
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
+/* Enqueue theme styles */
 
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
+	add_action( 'wp_enqueue_scripts', 'brightred_scripts' );
 
-/**
- * Functions which enhance the theme by hooking into WordPress.
- */
-require get_template_directory() . '/inc/template-functions.php';
-
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
-}
+	function dynamic_style() {
+	    if( get_field('theme-styles', 'option') == 'Straight Laced (eCommerce)' ) {
+	    	wp_enqueue_style( 'straight-laced', get_template_directory_uri() . '/inc/css/themes/straight-laced.css' );
+		}
+	}
+	add_action('wp_enqueue_scripts', 'dynamic_style', 99);
 
 
 /* Disable emojis */
-
 function disable_emojis() {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
@@ -208,9 +172,7 @@ function disable_emojis() {
 }
 add_action( 'init', 'disable_emojis' );
 
-/**
- * Filter out the tinymce emoji plugin.
- */
+/* Filter out the tinymce emoji plugin. */
 function disable_emojis_tinymce( $plugins ) {
 	if ( is_array( $plugins ) ) {
 		return array_diff( $plugins, array( 'wpemoji' ) );
@@ -227,14 +189,11 @@ function smartwp_remove_wp_block_library_css(){
 } 
 add_action( 'wp_enqueue_scripts', 'smartwp_remove_wp_block_library_css', 100 );
 
-/* Add mimes support */
 
+/* Add mimes support */
 function cc_mime_types($mimes) {
-  
   $mimes['svg'] = 'image/svg+xml';
   $mimes['ico'] = 'image/x-icon';
-  
-
   return $mimes;
 }
 add_filter('upload_mimes', 'cc_mime_types');
@@ -338,9 +297,7 @@ function woocommerce_support() {
 }
 
 /* ----
-
 Shortcodes 
-
 ----*/
 
 /* Social shortcode */
@@ -367,7 +324,6 @@ function social() {
     return $content;
 
 }
-	
 
 add_shortcode('social', 'social');
 
