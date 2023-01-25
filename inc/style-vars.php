@@ -73,6 +73,35 @@ if( function_exists('acf_add_options_page') ) {
     'parent_slug' => 'theme-general-settings',
   ));
 
+/* Design specific MU plugins */
+
+    if( get_field('sitetype', 'option') == 'eCommerce' ) :
+
+      array_push( $plugins,
+
+        array(
+          'name'         => 'ShopEngine Pro', 
+          'slug'         => 'shopengine-pro',
+          'required'     => true,
+          'external_url' => 'https://account.wpmet.com/?wpmet-screen=login',
+        ),
+
+        array(
+          'name'      => 'WooCommerce',
+          'slug'      => 'woocommerce',
+          'required'  => true,
+        ),
+
+        array(
+          'name'      => 'ShopEngine',
+          'slug'      => 'shopengine',
+          'required'  => true,
+        ),
+
+      );  
+
+    endif;  
+
 /* Change Site Indentiy */
 
   add_action('acf/init', 'siteDetails'); 
