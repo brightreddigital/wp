@@ -215,22 +215,6 @@ function brightred_scripts() {
 
 add_action( 'wp_enqueue_scripts', 'brightred_scripts' );
 
-
-
-	/* Enqueue site type specific styles */
-
-	// add_action( 'wp_enqueue_scripts', 'brightred_scripts' );
-
-	function dynamic_style() {
-	    if( get_field('sitetype', 'option') == 'eCommerce' ) {
-	    	wp_enqueue_style( 'ecommerce', get_template_directory_uri() . '/inc/css/sitetype/ecommerce.css' );
-		}
-		if( get_field('sitetype', 'option') == 'Brochure' ) {
-	    	wp_enqueue_style( 'ecommerce', get_template_directory_uri() . '/inc/css/sitetype/brochure.css' );
-		}
-	}
-	add_action('wp_enqueue_scripts', 'dynamic_style', 99);
-
 /* 
 ---------
 Clean up
