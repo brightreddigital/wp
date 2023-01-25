@@ -8,7 +8,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+	define( '_S_VERSION', '1.0.1' );
 }
 
 /* 
@@ -131,7 +131,7 @@ function register_required_plugins() {
 
 	);
 
-	if ( is_plugin_active( 'elementor-pro/elementor-pro.php' ) ) {
+
  		// // Site type specific required plugins
 		if( get_field('sitetype', 'option') == 'eCommerce' ) :
 
@@ -159,7 +159,7 @@ function register_required_plugins() {
 			);	
 
 		endif;	
-	} 
+	
 
 	
 
@@ -295,66 +295,7 @@ function cc_mime_types($mimes) {
 }
 add_filter('upload_mimes', 'cc_mime_types');
 
-/* 
---------
-Theme options 
---------
-*/
 
-if( function_exists('acf_add_options_page') ) {
-		
-	/* Add theme options pages */
-	acf_add_options_page(array(
-		'page_title' 	=> 'Theme General Settings',
-		'menu_title'	=> 'Theme Settings',
-		'menu_slug' 	=> 'theme-general-settings',
-		'capability'	=> 'edit_posts',
-		'redirect'		=> false
-	));
-	
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Theme Typography Settings',
-		'menu_title'	=> 'Typography',
-		'parent_slug'	=> 'theme-general-settings',
-	));
-	
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Theme Footer Settings',
-		'menu_title'	=> 'Footer',
-		'parent_slug'	=> 'theme-general-settings',
-	));
-
-/* Change Site Indentiy */
-
-	add_action('acf/init', 'siteDetails'); 
-
-	function siteDetails() {
-
-		$sitetitle = get_field('site_title', 'option');		
-		
-		if ($sitetitle) {
-			update_option('blogname', $sitetitle);
-		} else {
-			update_option( 'blogname', '' );	
-		}
-
-		$tagline = get_field('tagline', 'option');		
-		
-		if ($tagline) {
-			update_option('blogdescription', $tagline);
-		} else {
-			update_option( 'blogdescription', '' );	
-		}
-
-		$adminemail = get_field('admin_email', 'option');		
-		
-		if ($adminemail) {
-			update_option('admin_email', $adminemail);
-		} else {
-			update_option( 'admin_email', '' );	
-		}
-
-	}
 
 /* Upload Favion */
 
