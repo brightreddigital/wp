@@ -38,8 +38,14 @@
   --dark-colour: <?php the_field( 'dark_colour', 'option' ) ?>;
   --light-colour: <?php the_field( 'light_colour', 'option' ) ?>;
 
-}
+};
 
-@import 'inc/css/themes/straight-laced.css';
+<!-- Load styles based on theme options -->
+
+<?php if( get_field('sitetype', 'option') == 'eCommerce' ) { ?> 
+  @import 'inc/css/sitetype/ecommerce.css'; 
+<?php } ?>
+
+
 
 

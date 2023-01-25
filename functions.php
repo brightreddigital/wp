@@ -1,62 +1,44 @@
 <?php
+
 /**
- * brightred functions and definitions
- *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
- * @package brightred
- */
+* Functions and definitions
+* @link https://developer.wordpress.org/themes/basics/theme-functions/
+* @package brightred
+*/
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
 	define( '_S_VERSION', '1.0.0' );
 }
 
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- */
+/* 
+------------
+Theme defaults and support for various WordPress features 
+------------
+*/
+
 function brightred_setup() {
-	/*
-		* Make theme available for translation.
-		* Translations can be filed in the /languages/ directory.
-		* If you're building a theme based on brightred, use a find and replace
-		* to change 'brightred' to the name of your theme in all the template files.
-		*/
+	
+	// Translation
 	load_theme_textdomain( 'brightred', get_template_directory() . '/languages' );
 
-	// Add default posts and comments RSS feed links to head.
+	// Add default posts and comments RSS feed links to head
 	add_theme_support( 'automatic-feed-links' );
 
-	/*
-		* Let WordPress manage the document title.
-		* By adding theme support, we declare that this theme does not use a
-		* hard-coded <title> tag in the document head, and expect WordPress to
-		* provide it for us.
-		*/
+	// Let WordPress manage the document title
 	add_theme_support( 'title-tag' );
 
-	/*
-		* Enable support for Post Thumbnails on posts and pages.
-		*
-		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-		*/
+	// Post Thumbnails on posts and pages		
 	add_theme_support( 'post-thumbnails' );
 
-	// This theme uses wp_nav_menu() in one location.
+	// Uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'brightred' ),
+			'menu' => esc_html__( 'Primary', 'brightred' ),
 		)
 	);
 
-	/*
-		* Switch default core markup for search form, comment form, and comments
-		* to output valid HTML5.
-		*/
+	// Switch default core markup for search form, comment form, and comments to output valid HTML5
 	add_theme_support(
 		'html5',
 		array(
@@ -85,11 +67,7 @@ function brightred_setup() {
 	// Add theme support for selective refresh for widgets.
 	add_theme_support( 'customize-selective-refresh-widgets' );
 
-	/**
-	 * Add support for core custom logo.
-	 *
-	 * @link https://codex.wordpress.org/Theme_Logo
-	 */
+	// Custom logo
 	add_theme_support(
 		'custom-logo',
 		array(
@@ -100,76 +78,179 @@ function brightred_setup() {
 		)
 	);
 }
+
 add_action( 'after_setup_theme', 'brightred_setup' );
 
-/**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function brightred_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'brightred_content_width', 640 );
-}
-add_action( 'after_setup_theme', 'brightred_content_width', 0 );
+/*
+--------- 
+Register the required plugins 
+----------
+*/
 
-/* Parse style variables */
+require_once dirname( __FILE__ ) . '/class-tgm-plugin-activation.php';
+
+add_action( 'tgmpa_register', 'register_required_plugins' );
+
+function register_required_plugins() {
+
+	$plugins = array(
+
+		// Plugins from external sources
+		array(
+			'name'         => 'Elementor Pro', 
+			'slug'         => 'elementor-pro',
+			'required'     => true,
+			'external_url' => 'https://my.elementor.com/subscriptions/',
+		),
+
+		array(
+			'name'         => 'Advanced Custom Fields PRO',
+			'slug'         => 'advanced-custom-fields-pro',
+			'required'     => true,
+			'external_url' => 'https://www.advancedcustomfields.com/my-account/',
+		),
+
+		// Plugins from the WordPress Plugin Repository
+		array(
+			'name'      => 'Advanced Custom Fields: Typography Field',
+			'slug'      => 'acf-typography-field',
+			'required'  => true,
+		),
+
+		array(
+			'name'      => 'Classic Editor',
+			'slug'      => 'classic-editor',
+			'required'  => true,
+		),
+
+		array(
+			'name'      => 'WP Pusher',
+			'slug'      => 'wppusher',
+			'required'  => true,
+		),
+
+	);
+
+	if ( is_plugin_active( 'elementor-pro/elementor-pro.php' ) ) {
+ 		// // Site type specific required plugins
+		if( get_field('sitetype', 'option') == 'eCommerce' ) :
+
+			array_push(	$plugins,
+
+				array(
+					'name'         => 'ShopEngine Pro', 
+					'slug'         => 'shopengine-pro',
+					'required'     => true,
+					'external_url' => 'https://account.wpmet.com/?wpmet-screen=login',
+				),
+
+				array(
+					'name'      => 'WooCommerce',
+					'slug'      => 'woocommerce',
+					'required'  => true,
+				),
+
+				array(
+					'name'      => 'ShopEngine',
+					'slug'      => 'shopengine',
+					'required'  => true,
+				),
+
+			);	
+
+		endif;	
+	} 
+
+	
+
+	
+	$config = array(
+		'id'           => 'tgmpa',                 // Unique ID for hashing notices for multiple instances of TGMPA.
+		'default_path' => '',                      // Default absolute path to bundled plugins.
+		'menu'         => 'install-plugins',       // Menu slug.
+		'parent_slug'  => 'themes.php',            // Parent menu slug.
+		'capability'   => 'edit_theme_options',    // Capability needed to view plugin install page, should be a capability associated with the parent menu used.
+		'has_notices'  => true,                    // Show admin notices or not.
+		'dismissable'  => false,                   // If false, a user cannot dismiss the nag message.
+		'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
+		'is_automatic' => true,                    // Automatically activate plugins after installation or not.
+		'message'      => '',                      // Message to output right before the plugins table.
+
+	);
+
+	tgmpa( $plugins, $config );
+}
+
+/* 
+--------
+Parse style variables
+--------
+*/
 
 function generate_options_css() {
     $ss_dir = get_stylesheet_directory();
     ob_start(); // Capture all output into buffer
-    require($ss_dir . '/inc/css/style-vars.php'); // Grab the custom-style.php file
+    require($ss_dir . '/inc/css/style-vars.php'); // Grab the custom styles file
     $css = ob_get_clean(); // Store output in a variable, then flush the buffer
     file_put_contents($ss_dir . '/inc/css/style-vars.css', $css, LOCK_EX); // Save it as a css file
 }
-add_action( 'acf/save_post', 'generate_options_css', 20 ); //Parse the output and write the CSS file on post save
-
+add_action( 'acf/save_post', 'generate_options_css', 20 ); //Parse the output and write the CSS file on save
 
 /**
- * Enqueue scripts and styles.
+---------
+* Enqueue scripts and styles
+---------
  */
+
 function brightred_scripts() {
 	
 	wp_enqueue_style( 'style-variables', get_template_directory_uri() . '/inc/css/style-vars.css' );
-	
 	wp_enqueue_style( 'brightred-style', get_stylesheet_uri(), array(), _S_VERSION );
-	
 	wp_style_add_data( 'brightred-style', 'rtl', 'replace' );
-
 	wp_enqueue_script( 'brightred-theme-style', get_template_directory_uri() . '/js/theme.js', array(), _S_VERSION, true );
-
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
+
 add_action( 'wp_enqueue_scripts', 'brightred_scripts' );
 
-/* Enqueue theme styles */
+if ( is_plugin_active( 'elementor-pro/elementor-pro.php' ) ) {
 
-	add_action( 'wp_enqueue_scripts', 'brightred_scripts' );
+	/* Enqueue site type specific styles */
+
+	// add_action( 'wp_enqueue_scripts', 'brightred_scripts' );
 
 	function dynamic_style() {
-	    if( get_field('theme-styles', 'option') == 'Straight Laced (eCommerce)' ) {
-	    	wp_enqueue_style( 'straight-laced', get_template_directory_uri() . '/inc/css/themes/straight-laced.css' );
+	    if( get_field('sitetype', 'option') == 'eCommerce' ) {
+	    	wp_enqueue_style( 'ecommerce', get_template_directory_uri() . '/inc/css/sitetype/ecommerce.css' );
+		}
+		if( get_field('sitetype', 'option') == 'Brochure' ) {
+	    	wp_enqueue_style( 'ecommerce', get_template_directory_uri() . '/inc/css/sitetype/brochure.css' );
 		}
 	}
 	add_action('wp_enqueue_scripts', 'dynamic_style', 99);
-
+}
+/* 
+---------
+Clean up
+---------
+*/
 
 /* Disable emojis */
 function disable_emojis() {
+	
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
 	remove_action( 'admin_print_styles', 'print_emoji_styles' );	
 	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
 	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );	
-	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-	
+	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );	
 	// Remove from TinyMCE
 	add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
 }
+
 add_action( 'init', 'disable_emojis' );
 
 /* Filter out the tinymce emoji plugin. */
@@ -183,14 +264,46 @@ function disable_emojis_tinymce( $plugins ) {
 
 //Remove Gutenberg Block Library CSS from loading on the frontend
 function smartwp_remove_wp_block_library_css(){
- wp_dequeue_style( 'wp-block-library' );
- wp_dequeue_style( 'wp-block-library-theme' );
- wp_dequeue_style( 'wc-blocks-style' ); // Remove WooCommerce block CSS
+
+	wp_dequeue_style( 'wp-block-library' );
+	wp_dequeue_style( 'wp-block-library-theme' );
+	wp_dequeue_style( 'wc-blocks-style' ); // Remove WooCommerce block CSS
+
 } 
+
 add_action( 'wp_enqueue_scripts', 'smartwp_remove_wp_block_library_css', 100 );
 
+// Disable WooCommerce bloat
+add_filter( 'woocommerce_admin_disabled', '__return_true' );
+add_filter( 'jetpack_just_in_time_msgs', '__return_false', 20 );
+add_filter( 'jetpack_show_promotions', '__return_false', 20 );
+add_filter( 'woocommerce_allow_marketplace_suggestions', '__return_false', 999 );
+add_filter( 'woocommerce_helper_suppress_admin_notices', '__return_true' );
+add_filter( 'woocommerce_marketing_menu_items', '__return_empty_array' );
+add_filter( 'woocommerce_background_image_regeneration', '__return_false' );
+add_filter( 'wp_lazy_loading_enabled', '__return_false' );
+add_filter( 'woocommerce_menu_order_count', 'false' );
+add_filter( 'woocommerce_enable_nocache_headers', '__return_false' );
+add_filter( 'woocommerce_include_processing_order_count_in_menu', '__return_false' );
+add_action( 'admin_menu', function() { remove_menu_page( 'skyverge' ); }, 99 );
+add_action( 'admin_enqueue_scripts', function() { wp_dequeue_style( 'sv-wordpress-plugin-admin-menus' ); }, 20 );
+add_action( 'wp_dashboard_setup', function () { remove_meta_box( 'e-dashboard-overview', 'dashboard', 'normal'); }, 40);
+add_action( 'admin_menu', function () { remove_submenu_page( 'woocommerce', 'wc-addons'); }, 999 );
 
-/* Add mimes support */
+add_filter( 'woocommerce_admin_features', function ( $features ) {
+
+	$marketing = array_search('marketing', $features);
+	unset( $features[$marketing] );
+	return $features;
+
+} );
+
+/* 
+--------
+Add mimes support 
+--------
+*/
+
 function cc_mime_types($mimes) {
   $mimes['svg'] = 'image/svg+xml';
   $mimes['ico'] = 'image/x-icon';
@@ -199,15 +312,14 @@ function cc_mime_types($mimes) {
 add_filter('upload_mimes', 'cc_mime_types');
 
 /* 
--------------
+--------
 Theme options 
--------------
+--------
 */
 
 if( function_exists('acf_add_options_page') ) {
 		
 	/* Add theme options pages */
-
 	acf_add_options_page(array(
 		'page_title' 	=> 'Theme General Settings',
 		'menu_title'	=> 'Theme Settings',
@@ -228,7 +340,7 @@ if( function_exists('acf_add_options_page') ) {
 		'parent_slug'	=> 'theme-general-settings',
 	));
 
-	/* Change Site Indentiy */
+/* Change Site Indentiy */
 
 	add_action('acf/init', 'siteDetails'); 
 
@@ -260,7 +372,7 @@ if( function_exists('acf_add_options_page') ) {
 
 	}
 
-	/* Upload Favion */
+/* Upload Favion */
 
 	// Place favicon in root directory
 	function acf_upload_dir_prefilter($errors, $file, $field) {
@@ -275,7 +387,7 @@ if( function_exists('acf_add_options_page') ) {
     
 }
 
-	// Add favicion link to <head>
+// Add favicion link to <head>
 	function add_favicon(){ ?>
 
 		<link rel="icon" type="image/png" href="<?php echo the_field('favicon', 'option'); ?>">
@@ -289,7 +401,11 @@ if( function_exists('acf_add_options_page') ) {
 	
 }
 
-/* Add Woocommerce support */
+/* 
+--------
+Add Woocommerce support 
+--------
+*/
 
 add_action( 'after_setup_theme', 'woocommerce_support' );
 function woocommerce_support() {
@@ -300,8 +416,7 @@ function woocommerce_support() {
 Shortcodes 
 ----*/
 
-/* Social shortcode */
-
+// Social shortcode
 function social() {
 	
 	ob_start();
@@ -327,8 +442,7 @@ function social() {
 
 add_shortcode('social', 'social');
 
-/* Phone shortcode */
-
+// Phone shortcode
 function phone() {
 	
 	ob_start(); ?>
@@ -347,8 +461,7 @@ function phone() {
 
 add_shortcode('phone', 'phone');
 
-/* Email shortcode */
-
+// Email shortcode
 function email() {
 	
 	ob_start(); ?>
@@ -367,8 +480,7 @@ function email() {
 
 add_shortcode('email', 'email');
 
-/* Sitewide offers shortcode */
-
+// Sitewide offers shortcode
 function sitewideoffers() {
 	
 	ob_start();
@@ -393,5 +505,7 @@ function sitewideoffers() {
 	
 
 add_shortcode('sitewideoffers', 'sitewideoffers');
+
+
 
 
