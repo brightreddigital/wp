@@ -215,7 +215,7 @@ function brightred_scripts() {
 
 add_action( 'wp_enqueue_scripts', 'brightred_scripts' );
 
-if ( is_plugin_active( 'elementor-pro/elementor-pro.php' ) ) {
+
 
 	/* Enqueue site type specific styles */
 
@@ -230,7 +230,7 @@ if ( is_plugin_active( 'elementor-pro/elementor-pro.php' ) ) {
 		}
 	}
 	add_action('wp_enqueue_scripts', 'dynamic_style', 99);
-}
+
 /* 
 ---------
 Clean up
