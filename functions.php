@@ -132,33 +132,7 @@ function register_required_plugins() {
 	);
 
 
- 		// // Site type specific required plugins
-		if( get_field('sitetype', 'option') == 'eCommerce' ) :
-
-			array_push(	$plugins,
-
-				array(
-					'name'         => 'ShopEngine Pro', 
-					'slug'         => 'shopengine-pro',
-					'required'     => true,
-					'external_url' => 'https://account.wpmet.com/?wpmet-screen=login',
-				),
-
-				array(
-					'name'      => 'WooCommerce',
-					'slug'      => 'woocommerce',
-					'required'  => true,
-				),
-
-				array(
-					'name'      => 'ShopEngine',
-					'slug'      => 'shopengine',
-					'required'  => true,
-				),
-
-			);	
-
-		endif;	
+ 			
 	
 
 	
