@@ -324,7 +324,6 @@ add_filter('upload_mimes', 'cc_mime_types');
 
 	add_action('wp_head','add_favicon');
 	
-}
 
 /* 
 --------
