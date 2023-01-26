@@ -1,36 +1,44 @@
 :root {
 
-  --body-font: <?php the_typography_field( 'body_font', 'font_family', 'option' ) ?>;
-  --body-weight: <?php the_typography_field( 'body_font', 'font_weight', 'option' ) ?>;
+  --body-font: <?php the_field( 'body_font', 'option' ) ?>;
+  --body-weight: <?php the_field( 'body_font_weight', 'option' ) ?>;
   --body-colour: <?php the_field( 'body_colour', 'option' ) ?>;
 
   --link-colour: rgba(<?php the_field( 'link_colour', 'option' ) ?>);
-  --link-weight: <?php the_typography_field( 'link_weight', 'font_weight' ,'option' ) ?>;
+  --link-weight: <?php the_field( 'link_font_weight' ,'option' ) ?>;
   --link-hover-colour: <?php the_field( 'link_hover_colour', 'option' ) ?>;
+  --link-style: <?php the_field( 'link_style', 'option' ) ?>;
 
-  --h1-font: <?php the_typography_field( 'h1_font', 'font_family', 'option' ) ?>;
-  --h1-weight: <?php the_typography_field( 'h1_font', 'font_weight', 'option' ) ?>;
+
+  --h1-font: <?php the_field( 'h1_font', 'option' ) ?>;
+  --h1-weight: <?php the_field('h1_font_weight', 'option' ) ?>;
   --h1-colour: <?php the_field( 'h1_colour', 'option' ) ?>;
+  --h1-style: <?php the_field( 'h1_style', 'option' ) ?>;
 
-  --h2-font: <?php the_typography_field( 'h2_font', 'font_family', 'option' ) ?>;
-  --h2-weight: <?php the_typography_field( 'h2_font', 'font_weight', 'option' ) ?>;
+  --h2-font: <?php the_field( 'h2_font', 'option' ) ?>;
+  --h2-weight: <?php the_field('h2_font_weight', 'option' ) ?>;
   --h2-colour: <?php the_field( 'h2_colour', 'option' ) ?>;
+  --h2-style: <?php the_field( 'h2_style', 'option' ) ?>;
 
-  --h3-font: <?php the_typography_field( 'h3_font', 'font_family', 'option' ) ?>;
-  --h3-weight: <?php the_typography_field( 'h3_font', 'font_weight', 'option' ) ?>;
+  --h3-font: <?php the_field( 'h3_font', 'option' ) ?>;
+  --h3-weight: <?php the_field('h3_font_weight', 'option' ) ?>;
   --h3-colour: <?php the_field( 'h3_colour', 'option' ) ?>;
+  --h3-style: <?php the_field( 'h3_style', 'option' ) ?>;
 
-  --h4-font: <?php the_typography_field( 'h4_font', 'font_family', 'option' ) ?>;
-  --h4-weight: <?php the_typography_field( 'h4_font', 'font_weight', 'option' ) ?>;
+  --h4-font: <?php the_field( 'h4_font', 'option' ) ?>;
+  --h4-weight: <?php the_field('h4_font_weight', 'option' ) ?>;
   --h4-colour: <?php the_field( 'h4_colour', 'option' ) ?>;
+  --h4-style: <?php the_field( 'h4', 'option' ) ?>;
 
-  --h5-font: <?php the_typography_field( 'h5_font', 'font_family', 'option' ) ?>;
-  --h5-weight: <?php the_typography_field( 'h5_font', 'font_weight', 'option' ) ?>;
+  --h5-font: <?php the_field( 'h5_font', 'option' ) ?>;
+  --h5-weight: <?php the_field('h5_font_weight', 'option' ) ?>;
   --h5-colour: <?php the_field( 'h5_colour', 'option' ) ?>;
+  --h5-style: <?php the_field( 'h5_style', 'option' ) ?>;
 
-  --h6-font: <?php the_typography_field( 'h6_font', 'font_family', 'option' ) ?>;
-  --h6-weight: <?php the_typography_field( 'h6_font', 'font_weight', 'option' ) ?>;
+  --h6-font: <?php the_field( 'h6_font', 'option' ) ?>;
+  --h6-weight: <?php the_field('h6_font_weight', 'option' ) ?>;
   --h6-colour: <?php the_field( 'h6_colour', 'option' ) ?>;
+  --h6-style: <?php the_field( 'h6_style', 'option' ) ?>;
 
   --primary-colour: <?php the_field( 'primary_colour', 'option' ) ?> ;
   --second-colour: <?php the_field( 'second_colour', 'option' ) ?> ;
@@ -40,59 +48,3 @@
 
 }
 
-<?php 
-
-if ( is_plugin_active( 'elementor-pro/elementor-pro.php' ) ) {
-
-  /* 
---------
-Theme options 
---------
-*/
-
-/* Change Site Indentiy */
-
-  add_action('acf/init', 'siteDetails'); 
-
-  function siteDetails() {
-
-    $sitetitle = get_field('site_title', 'option');   
-    
-    if ($sitetitle) {
-      update_option('blogname', $sitetitle);
-    } else {
-      update_option( 'blogname', '' );  
-    }
-
-    $tagline = get_field('tagline', 'option');    
-    
-    if ($tagline) {
-      update_option('blogdescription', $tagline);
-    } else {
-      update_option( 'blogdescription', '' ); 
-    }
-
-    $adminemail = get_field('admin_email', 'option');   
-    
-    if ($adminemail) {
-      update_option('admin_email', $adminemail);
-    } else {
-      update_option( 'admin_email', '' ); 
-    }
-
-  }
-
-  /* Enqueue site type specific styles */
-
-  // add_action( 'wp_enqueue_scripts', 'brightred_scripts' );
-
-  function dynamic_style() {
-      if( get_field('sitetype', 'option') == 'eCommerce' ) {
-        wp_enqueue_style( 'ecommerce', get_template_directory_uri() . '/inc/css/sitetype/ecommerce.css' );
-    }
-    if( get_field('sitetype', 'option') == 'Brochure' ) {
-        wp_enqueue_style( 'ecommerce', get_template_directory_uri() . '/inc/css/sitetype/brochure.css' );
-    }
-  }
-  add_action('wp_enqueue_scripts', 'dynamic_style', 99);
-}

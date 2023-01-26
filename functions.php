@@ -111,11 +111,6 @@ function register_required_plugins() {
 		),
 
 		// Plugins from the WordPress Plugin Repository
-		array(
-			'name'      => 'Advanced Custom Fields: Typography Field',
-			'slug'      => 'acf-typography-field',
-			'required'  => true,
-		),
 
 		array(
 			'name'      => 'Classic Editor',

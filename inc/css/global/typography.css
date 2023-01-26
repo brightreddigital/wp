@@ -25,6 +25,7 @@ a:not(#wpadminbar a){
 p a, p a:visited, .icon-text-inline {
 	color: var(--link-colour);
 	font-weight: var(--link-weight);
+	font-style: var(--link-style);
 }
 
 p a:hover, .icon-text-inline:hover {
@@ -35,6 +36,7 @@ h1 {
 	color: var(--h1-colour);
 	font-family: var(--h1-font) ;
 	font-weight: var(--h1-weight);
+	font-style: var(--h1-style);
 	line-height: 1.1em !important;
 }
 
@@ -42,28 +44,33 @@ h2 {
 	color: var(--h2-colour);
 	font-family: var(--h2-font) ;
 	font-weight: var(--h2-weight) ;
+	font-style: var(--h2-style);
 }
 
 h3 {
 	color: var(--h3-colour);
 	font-family: var(--h3-font) ;
 	font-weight: var(--h3-weight) ;
+	font-style: var(--h3-style);
 }
 
 h4 {
 	color: var(--h4-colour);
 	font-family: var(--h4-font) ;
 	font-weight: var(--h4-weight) ;
+	font-style: var(--h4-style);
 }
 
 h5 {
 	color: var(--h5-colour);
 	font-family: var(--h5-font) ;
 	font-weight: var(--h5-weight) ;
+	font-style: var(--h5-style);
 }
 
 h6 {
 	color: var(--h6-colour);
 	font-family: var(--h6-font) ;
 	font-weight: var(--h6-weight) ;
+	font-style: var(--h6-style);
 }
