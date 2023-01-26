@@ -44,7 +44,7 @@ h1 {
 	font-family: var(--h1-font) ;
 	font-weight: var(--h1-weight);
 	font-style: var(--h1-style);
-	font-size: var(--h1-size-m)
+	font-size: var(--h1-size-m);
 	line-height: 1.1em !important;
 }
 
@@ -53,7 +53,7 @@ h2 {
 	font-family: var(--h2-font) ;
 	font-weight: var(--h2-weight) ;
 	font-style: var(--h2-style);
-	font-size: var(--h2-size-m)
+	font-size: var(--h2-size-m);
 	line-height: 1.2em !important;
 }
 
@@ -62,7 +62,7 @@ h3 {
 	font-family: var(--h3-font) ;
 	font-weight: var(--h3-weight) ;
 	font-style: var(--h3-style);
-	font-size: var(--h3-size-m)
+	font-size: var(--h3-size-m);
 }
 
 h4 {
@@ -70,51 +70,49 @@ h4 {
 	font-family: var(--h4-font) ;
 	font-weight: var(--h4-weight) ;
 	font-style: var(--h4-style);
-	font-size: var(--h4-size-m)
+	font-size: var(--h4-size-m);
 }
 
 h5 {
 	color: var(--h5-colour);
 	font-family: var(--h5-font) ;
-	font-weight: var(--h5-weight) ;
+	font-weight: var(--h5-weight);
 	font-style: var(--h5-style);
-	font-size: var(--h5-size-m)
+	font-size: var(--h5-size-m);
 }
 
 h6 {
 	color: var(--h6-colour);
-	font-family: var(--h6-font) ;
-	font-weight: var(--h6-weight) ;
+	font-family: var(--h6-font);
+	font-weight: var(--h6-weight);
 	font-style: var(--h6-style);
-	font-size: var(--h6-size-m)
+	font-size: var(--h6-size-m);
 }
 
 @media screen and (min-width: 992px;) {
 	h1 {
-		font-size: var(--h1-size-d)
+		font-size: var(--h1-size-d);
 	}
 
 	h2 {
-		font-size: var(--h2-size-d)
+		font-size: var(--h2-size-d);
 	}
 
 	h3 {
-
-		font-size: var(--h3-size-d)
+		font-size: var(--h3-size-d);
 	}
 
 	h4 {
 
-		font-size: var(--h4-size-d)
+		font-size: var(--h4-size-d);
 	}
 
 	h5 {
 
-		font-size: var(--h5-size-d)
+		font-size: var(--h5-size-d);
 	}
 
 	h6 {
-
-		font-size: var(--h6-size-d)
+		font-size: var(--h6-size-d);
 	}
 }
