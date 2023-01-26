@@ -1,5 +1,12 @@
 /* Typography */
 
+body {
+	font-size: var(--body-font) !important:
+	color: var(--body-colour) !important;
+	font-family: var(--body-font) !important;
+	font-weight: var(--body-weight) !important;
+}
+
 span:not(#wpadminbar span) {
 	font-family: var(--body-font):
 	font-weight: var(--body-weight);
