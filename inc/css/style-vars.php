@@ -3,6 +3,7 @@
   --body-font: <?php the_field( 'body_font', 'option' ) ?>;
   --body-weight: <?php the_field( 'body_font_weight', 'option' ) ?>;
   --body-colour: <?php the_field( 'body_colour', 'option' ) ?>;
+    --body-size: <?php the_field( 'body_size', 'option' ) ?>;
 
   --link-colour: rgba(<?php the_field( 'link_colour', 'option' ) ?>);
   --link-weight: <?php the_field( 'link_font_weight' ,'option' ) ?>;
