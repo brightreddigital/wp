@@ -1,7 +1,7 @@
 :root {
 
   --body-font: <?php the_field( 'body_font', 'option' ) ?>;
-  --body-weight: <?php the_field( 'body_font_weight', 'option' ) ?>;
+  --body-weight: <?php the_field( 'body_weight', 'option' ) ?>;
   --body-colour: <?php the_field( 'body_colour', 'option' ) ?>;
   --body-size: <?php the_field( 'body_size', 'option' ) ?>;
 
