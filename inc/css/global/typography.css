@@ -29,7 +29,7 @@ a:not(#wpadminbar a){
 	line-height: 1.5em;
 }
 
-p a, p a:visited, .icon-text-inline {
+a, a:visited, .icon-text-inline {
 	color: var(--link-colour);
 	font-weight: var(--link-weight);
 	font-style: var(--link-style);
