@@ -372,6 +372,9 @@ function woocommerce_support() {
 	add_theme_support( 'woocommerce' );
 }
 
+// Disable Google Fonts in Elementor
+add_filter( 'elementor/frontend/print_google_fonts', '__return_false' );
+
 /* ----
 Shortcodes 
 ----*/
