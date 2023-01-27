@@ -1,6 +1,6 @@
 :root {
 
-  --body-font: <?php the_field( 'body_font', 'option' ) ?>;
+  --body-font: '<?php the_field( 'body_font', 'option' ) ?>;', sans-serif;
   --body-weight: <?php the_field( 'body_weight', 'option' ) ?>;
   --body-colour: <?php the_field( 'body_colour', 'option' ) ?>;
   --body-size: <?php the_field( 'body_size', 'option' ) ?>;
