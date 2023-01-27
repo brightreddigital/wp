@@ -1,10 +1,10 @@
 /* Typography */
 
 body {
-	font-size: var(--body-size) !important;
-	color: var(--body-colour) !important;
-	font-family: var(--body-font) !important;
-	font-weight: var(--body-weight) !important;
+	font-size: var(--body-size);
+	color: var(--body-colour);
+	font-family: var(--body-font);
+	font-weight: var(--body-weight);
 }
 
 span:not(#wpadminbar span) {
@@ -14,19 +14,19 @@ span:not(#wpadminbar span) {
 }
 
 p:last-of-type {
-	margin-bottom: 0 !important ;
+	margin-bottom: 0 ;
 }
 
 p {
-	color: var(--body-colour) !important;
-	font-family: var(--body-font) !important;
-	font-weight: var(--body-weight) !important;
-	line-height: 1.5em !important;
+	color: var(--body-colour);
+	font-family: var(--body-font);
+	font-weight: var(--body-weight);
+	line-height: 1.5em;
 }
 
 a:not(#wpadminbar a){
-	font-family: var(--body-font) !important;
-	line-height: 1.5em !important;
+	font-family: var(--body-font);
+	line-height: 1.5em;
 }
 
 p a, p a:visited, .icon-text-inline {
@@ -45,7 +45,7 @@ h1 {
 	font-weight: var(--h1-weight);
 	font-style: var(--h1-style);
 	font-size: var(--h1-size-m);
-	line-height: 1.1em !important;
+	line-height: 1.1em;
 }
 
 h2 {
@@ -54,7 +54,7 @@ h2 {
 	font-weight: var(--h2-weight) ;
 	font-style: var(--h2-style);
 	font-size: var(--h2-size-m);
-	line-height: 1.2em !important;
+	line-height: 1.2em;
 }
 
 h3 {
