@@ -1,9 +1,9 @@
 /* Typography */
 
 body {
-	font-size: var(--body-size);
+	font-size: var(--body-size) !important;
 	color: var(--body-colour);
-	font-family: var(--body-font);
+	font-family: var(--body-font) !important;
 	font-weight: var(--body-weight);
 }
 
