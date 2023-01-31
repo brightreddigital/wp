@@ -904,7 +904,7 @@ textarea {
 	margin-bottom: 1.5em;
 }
 
-/* Remove top margins first first elements */
+/* Remove top margins for first elements */
 
-* > :first-child { margin-top: 0 !important; }
+* > :first-child { margin-top: 0; }
 
