@@ -160,6 +160,12 @@ function register_required_plugins() {
     'menu_title'  => 'Typography',
     'parent_slug' => 'theme-general-settings',
   ));
+
+  acf_add_options_sub_page(array(
+    'page_title'  => 'Post Types',
+    'menu_title'  => 'Post Types',
+    'parent_slug' => 'theme-general-settings',
+  ));
   
   acf_add_options_sub_page(array(
     'page_title'  => 'Theme Footer Settings',
@@ -381,6 +387,23 @@ Custom post types
 ---- */
 
 /* Check ACF */ if( function_exists('acf_add_options_page') ) {
+
+	if( have_rows('repeater_field_name') ):
+
+    // Loop through rows.
+    while( have_rows('repeater_field_name') ) : the_row();
+
+        // Load sub field value.
+        $sub_value = get_sub_field('sub_field');
+        // Do something...
+
+    // End loop.
+    endwhile;
+
+// No value.
+else :
+    // Do something...
+endif;
 
 // You can register more, just duplicate the register_post_type code inside of the function and change the values. You are set!
 if ( ! function_exists( 'create_post_type' ) ) :
