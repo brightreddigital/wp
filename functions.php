@@ -387,37 +387,64 @@ function checkACF() {
 Custom post types 
 ---- */
 
+// function my_acf_save_post($post_id) {
+
+function create_posttype() {
+
 if( have_rows('post_type', 'option') ):
 
-	    // Loop through rows.
-	    while( have_rows('post_type','option') ) : the_row();
+	while( have_rows('post_type','option') ) : the_row();
+  
+// Set UI labels for Custom Post Type
+    $labels = array(
+        'name'                => __( get_sub_field('pt_name','options') ),
+        'singular_name'       => __( get_sub_field('pt_singular','options') ),
+        'menu_name'           => __( get_sub_field('pt_name','options') ),
+        'parent_item_colon'   => __( 'Parent ' . get_sub_field('pt_singular','options') ),
+        'all_items'           => __( 'All ' . get_sub_field('pt_name','options') ),
+        'view_item'           => __( 'View ' . get_sub_field('pt_singular','options') ),
+        'add_new_item'        => __( 'Add New ' . get_sub_field('pt_singular','options') ),
+        'add_new'             => __( 'Add New ' . get_sub_field('pt_singular','options') ),
+        'edit_item'           => __( 'Edit ' . get_sub_field('pt_singular','options') ),
+        'update_item'         => __( 'Update ' . get_sub_field('pt_singular','options') ),
+        'search_items'        => __( 'Search ' . get_sub_field('pt_singular','options') ),
+        'not_found'           => __( 'Not Found' ),
+        'not_found_in_trash'  => __( 'Not found in Trash' ),
+    );
+      
+    $args = array(
+        'label'               => __( get_sub_field('pt_slug','options') ),
+        'labels'              => $labels,
+        'supports'            => array( 'title', 'excerpt', 'author', 'thumbnail', 'revisions', ),
+        'taxonomies'          => array( 'category', 'post_tag' ),
+        'hierarchical'        => false,
+        'public'              => true,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => true,
+        'show_in_admin_bar'   => true,
+        'menu_position'       => 5,
+        'can_export'          => true,
+        'has_archive'         => true,
+        'exclude_from_search' => false,
+        'publicly_queryable'  => true,
+        'capability_type'     => 'post',
+        'show_in_rest' => true,
+        'menu_icon' => ( get_sub_field('pt_icon','options') ),
+  
+    );
+      
+    // Registering your Custom Post Type
+    register_post_type( get_sub_field('pt_slug','options'), $args );
 
-				// $ptName = get_sub_field('pt_name','option');
-				
-				// You'll want to replace the values below with your own.
-				register_post_type( 'test',
-					array(
-						'labels' => array(
-							'name' => __( 'test' ), // change the name
-							'singular_name' => __( 'genstarter' ), // change the name
-						),
-						'public' => false,  // it's not public, it shouldn't have it's own permalink, and so on
-						'exclude_from_search' => true,  // you should exclude it from search results
-						'has_archive' => false,  // it shouldn't have archive page
-						'supports' => array ( 'title', 'editor', 'custom-fields', 'page-attributes', 'thumbnail' ), // do you need all of these options?
-						'taxonomies' => array( 'category', 'post_tag' ), // do you need categories and tags?
-						// 'menu_icon' => get_bloginfo( 'template_directory' ) . "/images/icon.png",
-						'rewrite' => array ( 'slug' => __( 'genstarters' ) ) // change the name
-					)
-				);
-
-	    // End loop.
-	    endwhile;
-	
-	else :
+	endwhile;
 
 endif;
 
+
+}
+				// Hooking up our function to theme setup
+				add_action( 'init', 'create_posttype' );
 
 
 	/* ----
