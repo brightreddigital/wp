@@ -387,19 +387,22 @@ function checkACF() {
 Custom post types 
 ---- */
 
-// You can register more, just duplicate the register_post_type code inside of the function and change the values. You are set!
-if ( ! function_exists( 'create_post_type' ) ) :
+	if( have_rows('repeater_field_name', 'option') ):
 
 	function create_post_type() {
 
-		if( have_rows('repeater_field_name', 'option') ):
+	    // Loop through rows.
+	    while( have_rows('repeater_field_name','option') ) : the_row();
 
-			// Loop through rows.
-			while( have_rows('repeater_field_name','option') ) : the_row();
+	    	// You can register more, just duplicate the register_post_type code inside of the function and change the values. You are set!
+			if ( ! function_exists( 'create_post_type' ) ) :
 
-				$ptName = get_sub_field('pt_name','option');
 			
-				register_post_type( '<?php $ptName = get_sub_field('pt_name','option'); ?>', // change the name
+
+				$ptName = get_sub_field('sub_field','option');
+				
+				// You'll want to replace the values below with your own.
+				register_post_type( "'" . echo $ptName . "'",
 					array(
 						'labels' => array(
 							'name' => __( 'Gen Starter' ), // change the name
@@ -415,23 +418,23 @@ if ( ! function_exists( 'create_post_type' ) ) :
 					)
 				);
 
-        // Load sub field value.
-        
-        // Do something...
+			
+
+			
+
+			endif; // ####
 
 	    // End loop.
 	    endwhile;
 
-	// No value.
-	else :
+    }
+
+    add_action( 'init', 'create_post_type' );
+
+// No value.
+else :
     // Do something...
-	endif;
-
-endif; // ####
-
-}
-
-		add_action( 'init', 'create_post_type' );
+endif;
 
 
 
