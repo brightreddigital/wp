@@ -389,12 +389,8 @@ Custom post types
 
 if( have_rows('post_type', 'option') ):
 
-	function create_post_type() {
-
 	    // Loop through rows.
 	    while( have_rows('post_type','option') ) : the_row();
-
-	    	// You can register more, just duplicate the register_post_type code inside of the function and change the values. You are set!
 
 				// $ptName = get_sub_field('pt_name','option');
 				
@@ -420,7 +416,6 @@ if( have_rows('post_type', 'option') ):
 
     }
 
-    add_action( 'acf/save_post', 'create_post_type' );
 
 // No value.
 else :
