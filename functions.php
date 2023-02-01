@@ -387,7 +387,7 @@ function checkACF() {
 Custom post types 
 ---- */
 
-	if( have_rows('post_type', 'option') ):
+if( have_rows('post_type', 'option') ):
 
 	function create_post_type() {
 
@@ -423,7 +423,7 @@ Custom post types
 
     }
 
-    add_action( 'init', 'create_post_type' );
+    add_action( 'acf/save_post', 'create_post_type' );
 
 // No value.
 else :
