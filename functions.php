@@ -387,49 +387,53 @@ function checkACF() {
 Custom post types 
 ---- */
 
-	if( have_rows('repeater_field_name') ):
-
-    // Loop through rows.
-    while( have_rows('repeater_field_name') ) : the_row();
-
-        // Load sub field value.
-        $sub_value = get_sub_field('sub_field');
-        // Do something...
-
-    // End loop.
-    endwhile;
-
-// No value.
-else :
-    // Do something...
-endif;
-
 // You can register more, just duplicate the register_post_type code inside of the function and change the values. You are set!
 if ( ! function_exists( 'create_post_type' ) ) :
 
-function create_post_type() {
-	
-	// You'll want to replace the values below with your own.
-	register_post_type( 'genstarter', // change the name
-		array(
-			'labels' => array(
-				'name' => __( 'Gen Starter' ), // change the name
-				'singular_name' => __( 'genstarter' ), // change the name
-			),
-			'public' => true,
-			'supports' => array ( 'title', 'editor', 'custom-fields', 'page-attributes', 'thumbnail' ), // do you need all of these options?
-			'taxonomies' => array( 'category', 'post_tag' ), // do you need categories and tags?
-			'hierarchical' => true,
-			'menu_icon' => get_bloginfo( 'template_directory' ) . "/images/icon.png",
-			'rewrite' => array ( 'slug' => __( 'genstarters' ) ) // change the name
-		)
-	);
+	function create_post_type() {
+
+		if( have_rows('repeater_field_name', 'option') ):
+
+			// Loop through rows.
+			while( have_rows('repeater_field_name','option') ) : the_row();
+
+				$ptName = get_sub_field('pt_name','option');
+			
+				register_post_type( '<?php $ptName = get_sub_field('pt_name','option'); ?>', // change the name
+					array(
+						'labels' => array(
+							'name' => __( 'Gen Starter' ), // change the name
+							'singular_name' => __( 'genstarter' ), // change the name
+						),
+						'public' => false,  // it's not public, it shouldn't have it's own permalink, and so on
+						'exclude_from_search' => true,  // you should exclude it from search results
+						'has_archive' => false,  // it shouldn't have archive page
+						'supports' => array ( 'title', 'editor', 'custom-fields', 'page-attributes', 'thumbnail' ), // do you need all of these options?
+						'taxonomies' => array( 'category', 'post_tag' ), // do you need categories and tags?
+						'menu_icon' => get_bloginfo( 'template_directory' ) . "/images/icon.png",
+						'rewrite' => array ( 'slug' => __( 'genstarters' ) ) // change the name
+					)
+				);
+
+        // Load sub field value.
+        
+        // Do something...
+
+	    // End loop.
+	    endwhile;
+
+	// No value.
+	else :
+    // Do something...
+	endif;
+
+endif; // ####
 
 }
 
-add_action( 'init', 'create_post_type' );
+		add_action( 'init', 'create_post_type' );
 
-endif; // ####
+
 
 	/* ----
 	Shortcodes 
