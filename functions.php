@@ -293,7 +293,9 @@ add_filter( 'elementor/frontend/print_google_fonts', '__return_false' );
 
 
 /* ------- Check ACF -------- */ 
-if( function_exists('acf_add_options_page') ) :
+add_action( 'acf/init', 'checkACF' );
+
+function checkACF() {
 
 	// Add favicion link to <head>
 
@@ -523,7 +525,7 @@ endif; // ####
 
 add_shortcode('sitewideoffers', 'sitewideoffers');
 
-/* Check ACF END */ endif;	
+/* Check ACF END */ };	
 
 
 
