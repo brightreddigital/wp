@@ -413,13 +413,9 @@ if( have_rows('post_type', 'option') ):
 
 	    // End loop.
 	    endwhile;
+	
+	else :
 
-    }
-
-
-// No value.
-else :
-    // Do something...
 endif;
 
 
