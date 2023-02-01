@@ -176,6 +176,7 @@ function register_required_plugins() {
   /* Change Site Indentiy */
 
   add_action('acf/init', 'siteDetails'); 
+  add_action('acf/init', 'dynamic_style'); 
 
   function siteDetails() {
 
