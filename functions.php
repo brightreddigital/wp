@@ -395,9 +395,8 @@ if( have_rows('post_type', 'option') ):
 	    while( have_rows('post_type','option') ) : the_row();
 
 	    	// You can register more, just duplicate the register_post_type code inside of the function and change the values. You are set!
-			if ( ! function_exists( 'create_post_type' ) ) :
 
-				$ptName = get_sub_field('pt_name','option');
+				// $ptName = get_sub_field('pt_name','option');
 				
 				// You'll want to replace the values below with your own.
 				register_post_type( 'test',
@@ -415,8 +414,6 @@ if( have_rows('post_type', 'option') ):
 						'rewrite' => array ( 'slug' => __( 'genstarters' ) ) // change the name
 					)
 				);
-
-			endif; // ####
 
 	    // End loop.
 	    endwhile;
