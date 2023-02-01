@@ -400,10 +400,10 @@ Custom post types
 				$ptName = get_sub_field('pt_name','option');
 				
 				// You'll want to replace the values below with your own.
-				register_post_type( "'" . $ptName . "'",
+				register_post_type( 'test',
 					array(
 						'labels' => array(
-							'name' => __( "'" . $ptName . "'" ), // change the name
+							'name' => __( 'test' ), // change the name
 							'singular_name' => __( 'genstarter' ), // change the name
 						),
 						'public' => false,  // it's not public, it shouldn't have it's own permalink, and so on
