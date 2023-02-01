@@ -402,7 +402,7 @@ Custom post types
 				$ptName = get_sub_field('sub_field','option');
 				
 				// You'll want to replace the values below with your own.
-				register_post_type( "'" . echo $ptName . "'",
+				register_post_type( "'" . $ptName . "'",
 					array(
 						'labels' => array(
 							'name' => __( 'Gen Starter' ), // change the name
