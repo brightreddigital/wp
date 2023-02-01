@@ -292,7 +292,8 @@ Disable Google Fonts in Elementor
 add_filter( 'elementor/frontend/print_google_fonts', '__return_false' );
 
 
-/* ------- Check ACF -------- */ if( function_exists('acf_add_options_page') ) {
+/* ------- Check ACF -------- */ 
+if( function_exists('acf_add_options_page') ) :
 
 	// Add favicion link to <head>
 
@@ -423,6 +424,7 @@ function create_post_type() {
 	);
 
 }
+
 add_action( 'init', 'create_post_type' );
 
 endif; // ####
@@ -521,7 +523,7 @@ endif; // ####
 
 add_shortcode('sitewideoffers', 'sitewideoffers');
 
-/* Check ACF END */ }	
+/* Check ACF END */ endif;	
 
 
 
