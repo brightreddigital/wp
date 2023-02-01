@@ -143,84 +143,6 @@ function register_required_plugins() {
 	tgmpa( $plugins, $config );
 }
 
-/* Check ACF */ if( function_exists('acf_add_options_page') ) {
-    
-  /* Add theme options  */
-
-  acf_add_options_page(array(
-    'page_title'  => 'Theme General Settings',
-    'menu_title'  => 'Theme Settings',
-    'menu_slug'   => 'theme-general-settings',
-    'capability'  => 'edit_posts',
-    'redirect'    => false
-  ));
-  
-  acf_add_options_sub_page(array(
-    'page_title'  => 'Theme Typography Settings',
-    'menu_title'  => 'Typography',
-    'parent_slug' => 'theme-general-settings',
-  ));
-
-  acf_add_options_sub_page(array(
-    'page_title'  => 'Post Types',
-    'menu_title'  => 'Post Types',
-    'parent_slug' => 'theme-general-settings',
-  ));
-  
-  acf_add_options_sub_page(array(
-    'page_title'  => 'Theme Footer Settings',
-    'menu_title'  => 'Footer',
-    'parent_slug' => 'theme-general-settings',
-  ));
-
-  /* Change Site Indentiy */
-
-  add_action('acf/init', 'siteDetails'); 
-  add_action('acf/init', 'dynamic_style'); 
-
-  function siteDetails() {
-
-    $sitetitle = get_field('site_title', 'option');   
-    
-    if ($sitetitle) {
-      update_option('blogname', $sitetitle);
-    } else {
-      update_option( 'blogname', '' );  
-    }
-
-    $tagline = get_field('tagline', 'option');    
-    
-    if ($tagline) {
-      update_option('blogdescription', $tagline);
-    } else {
-      update_option( 'blogdescription', '' ); 
-    }
-
-    $adminemail = get_field('admin_email', 'option');   
-    
-    if ($adminemail) {
-      update_option('admin_email', $adminemail);
-    } else {
-      update_option( 'admin_email', '' ); 
-    }
-
-  }
-
-  /* Enqueue site type specific styles */
-
-	function dynamic_style() {
-	  	if( get_field('sitetype', 'option') == 'eCommerce' ) {
-	    wp_enqueue_style( 'ecommerce', get_template_directory_uri() . '/inc/css/sitetype/ecommerce.css' );
-		}
-		if( get_field('sitetype', 'option') == 'Brochure' ) {
-	    wp_enqueue_style( 'ecommerce', get_template_directory_uri() . '/inc/css/sitetype/brochure.css' );
-		}
-	}
-	add_action('wp_enqueue_scripts', 'dynamic_style', 99);
-
-/*ACF Check*/ }
-
-
 /* 
 --------
 Parse style variables
@@ -432,7 +354,80 @@ add_action( 'init', 'create_post_type' );
 
 endif; // ####
 
-/* Check ACF END */ }	
+/* ------- Check ACF -------- */ if( function_exists('acf_add_options_page') ) {
+    
+  /* Add theme options  */
+
+  acf_add_options_page(array(
+    'page_title'  => 'Theme General Settings',
+    'menu_title'  => 'Theme Settings',
+    'menu_slug'   => 'theme-general-settings',
+    'capability'  => 'edit_posts',
+    'redirect'    => false
+  ));
+  
+  acf_add_options_sub_page(array(
+    'page_title'  => 'Theme Typography Settings',
+    'menu_title'  => 'Typography',
+    'parent_slug' => 'theme-general-settings',
+  ));
+
+  acf_add_options_sub_page(array(
+    'page_title'  => 'Post Types',
+    'menu_title'  => 'Post Types',
+    'parent_slug' => 'theme-general-settings',
+  ));
+  
+  acf_add_options_sub_page(array(
+    'page_title'  => 'Theme Footer Settings',
+    'menu_title'  => 'Footer',
+    'parent_slug' => 'theme-general-settings',
+  ));
+
+  /* Change Site Indentiy */
+
+  add_action('acf/init', 'siteDetails'); 
+  add_action('acf/init', 'dynamic_style'); 
+
+  function siteDetails() {
+
+    $sitetitle = get_field('site_title', 'option');   
+    
+    if ($sitetitle) {
+      update_option('blogname', $sitetitle);
+    } else {
+      update_option( 'blogname', '' );  
+    }
+
+    $tagline = get_field('tagline', 'option');    
+    
+    if ($tagline) {
+      update_option('blogdescription', $tagline);
+    } else {
+      update_option( 'blogdescription', '' ); 
+    }
+
+    $adminemail = get_field('admin_email', 'option');   
+    
+    if ($adminemail) {
+      update_option('admin_email', $adminemail);
+    } else {
+      update_option( 'admin_email', '' ); 
+    }
+
+  }
+
+  /* Enqueue site type specific styles */
+
+	function dynamic_style() {
+	  	if( get_field('sitetype', 'option') == 'eCommerce' ) {
+	    wp_enqueue_style( 'ecommerce', get_template_directory_uri() . '/inc/css/sitetype/ecommerce.css' );
+		}
+		if( get_field('sitetype', 'option') == 'Brochure' ) {
+	    wp_enqueue_style( 'ecommerce', get_template_directory_uri() . '/inc/css/sitetype/brochure.css' );
+		}
+	}
+	add_action('wp_enqueue_scripts', 'dynamic_style', 99);
 
 /* ----
 Shortcodes 
@@ -528,7 +523,7 @@ function sitewideoffers() {
 
 add_shortcode('sitewideoffers', 'sitewideoffers');
 
-
+/* Check ACF END */ }	
 
 
 
