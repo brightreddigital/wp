@@ -410,7 +410,7 @@ if( have_rows('post_type', 'option') ):
 						'has_archive' => false,  // it shouldn't have archive page
 						'supports' => array ( 'title', 'editor', 'custom-fields', 'page-attributes', 'thumbnail' ), // do you need all of these options?
 						'taxonomies' => array( 'category', 'post_tag' ), // do you need categories and tags?
-						'menu_icon' => get_bloginfo( 'template_directory' ) . "/images/icon.png",
+						// 'menu_icon' => get_bloginfo( 'template_directory' ) . "/images/icon.png",
 						'rewrite' => array ( 'slug' => __( 'genstarters' ) ) // change the name
 					)
 				);
