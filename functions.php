@@ -293,7 +293,7 @@ add_filter( 'elementor/frontend/print_google_fonts', '__return_false' );
 
 
 /* ------- Check ACF -------- */ 
-add_action( 'init', 'checkACF' );
+add_action( 'acf/init', 'checkACF' );
 
 function checkACF() {
 
