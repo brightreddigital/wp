@@ -415,7 +415,7 @@ if( have_rows('post_type', 'option') ):
     $args = array(
         'label'               => __( get_sub_field('pt_slug','options') ),
         'labels'              => $labels,
-        'supports'            => array( 'title', 'excerpt', 'author', 'thumbnail', 'revisions', ),
+        'supports'            => array( 'title', 'excerpt', 'author', 'editor', 'comments', 'thumbnail', 'revisions', ),
         'taxonomies'          => array( 'category', 'post_tag' ),
         'hierarchical'        => false,
         'public'              => true,
