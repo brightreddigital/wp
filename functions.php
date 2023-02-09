@@ -16,7 +16,7 @@ Load partials
 ---*/
 
 $roots_includes = array(
-  '/functions/defaults.php',
+  '/inc/functions/defaults.php',
 );
 
 foreach($roots_includes as $file){
