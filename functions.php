@@ -11,75 +11,22 @@ if ( ! defined( '_S_VERSION' ) ) {
 	define( '_S_VERSION', '1.0.1' );
 }
 
-/* 
-------------
-Theme defaults and support for various WordPress features 
-------------
-*/
+/* ---
+Load partials
+---*/
 
-function brightred_setup() {
-	
-	// Translation
-	load_theme_textdomain( 'brightred', get_template_directory() . '/languages' );
+$roots_includes = array(
+  '/functions/defaults.php',
+);
 
-	// Add default posts and comments RSS feed links to head
-	add_theme_support( 'automatic-feed-links' );
+foreach($roots_includes as $file){
+  if(!$filepath = locate_template($file)) {
+    trigger_error("Error locating `$file` for inclusion!", E_USER_ERROR);
+  }
 
-	// Let WordPress manage the document title
-	add_theme_support( 'title-tag' );
-
-	// Post Thumbnails on posts and pages		
-	add_theme_support( 'post-thumbnails' );
-
-	// Uses wp_nav_menu() in one location.
-	register_nav_menus(
-		array(
-			'menu' => esc_html__( 'Primary', 'brightred' ),
-		)
-	);
-
-	// Switch default core markup for search form, comment form, and comments to output valid HTML5
-	add_theme_support(
-		'html5',
-		array(
-			'search-form',
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-			'style',
-			'script',
-		)
-	);
-
-	// Set up the WordPress core custom background feature.
-	add_theme_support(
-		'custom-background',
-		apply_filters(
-			'brightred_custom_background_args',
-			array(
-				'default-color' => 'ffffff',
-				'default-image' => '',
-			)
-		)
-	);
-
-	// Add theme support for selective refresh for widgets.
-	add_theme_support( 'customize-selective-refresh-widgets' );
-
-	// Custom logo
-	add_theme_support(
-		'custom-logo',
-		array(
-			'height'      => 250,
-			'width'       => 250,
-			'flex-width'  => true,
-			'flex-height' => true,
-		)
-	);
+  require_once $filepath;
 }
-
-add_action( 'after_setup_theme', 'brightred_setup' );
+unset($file, $filepath);
 
 /*
 --------- 
@@ -121,6 +68,24 @@ function register_required_plugins() {
 		array(
 			'name'      => 'WP Pusher',
 			'slug'      => 'wppusher',
+			'required'  => true,
+		),
+
+		array(
+			'name'      => 'Redirection',
+			'slug'      => 'redirection',
+			'required'  => true,
+		),
+
+		array(
+			'name'      => 'Duplicate Page',
+			'slug'      => 'duplicate-page',
+			'required'  => true,
+		),
+
+		array(
+			'name'      => 'LiteSpeed Cache',
+			'slug'      => 'litespeed-cache',
 			'required'  => true,
 		),
 
