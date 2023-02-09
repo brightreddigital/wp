@@ -1,3 +1,5 @@
+<?php 
+
 /* ------- Check ACF -------- */ 
 add_action( 'acf/init', 'checkACF' );
 
