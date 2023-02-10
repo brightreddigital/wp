@@ -98,7 +98,4 @@ function checkACFsc() {
 
 	add_shortcode('sitewideoffers', 'sitewideoffers');
 
-
-
-
 /* Check ACF END */ };

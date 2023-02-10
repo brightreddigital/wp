@@ -19,6 +19,7 @@ $roots_includes = array(
 	'/inc/functions/plugins.php',
 	'/inc/functions/theme-options.php',
 	'/inc/functions/styles.php',
+	'/inc/functions/shortcodes.php',
 );
 
 foreach($roots_includes as $file){
