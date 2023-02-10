@@ -1,10 +1,6 @@
 <?php
 
-/* 
-------------
-Theme defaults and support for various WordPress features 
-------------
-*/
+// Theme defaults and supports
 
 function brightred_setup() {
 	
@@ -54,9 +50,11 @@ function brightred_setup() {
 	);
 
 	// Add theme support for selective refresh for widgets.
+
 	add_theme_support( 'customize-selective-refresh-widgets' );
 
 	// Custom logo
+
 	add_theme_support(
 		'custom-logo',
 		array(
@@ -69,3 +67,20 @@ function brightred_setup() {
 }
 
 add_action( 'after_setup_theme', 'brightred_setup' );
+
+// Add mimes support 
+
+function cc_mime_types($mimes) {
+	$mimes['svg'] = 'image/svg+xml';
+	$mimes['ico'] = 'image/x-icon';
+	return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
+
+// Add Woocommerce support 
+
+add_action( 'after_setup_theme', 'woocommerce_support' );
+
+function woocommerce_support() {
+	add_theme_support( 'woocommerce' );
+}

@@ -28,7 +28,7 @@ N.B. This stylesheet is for Bright Red Theme only. Individual site content css c
 
 @import 'inc/css/shop.css';
 
-/* Theme colours */
+/* Root colours */
 
 :root {
 	--light-grey: #dadada;
