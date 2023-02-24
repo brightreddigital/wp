@@ -106,24 +106,24 @@ function checkACFsc() {
 
 	    ), $attributes);
 
-		$acfStr = "'" . $args['acf_field'] . "'";
-		$acfGet = "get_field(" . $acfStr . ")";
+		$acfStr = $args['acf_field'];
+		$acfGet = the_field($acfStr);
 
-		if (!empty($acfGet)):
-
-			$the_query = new WP_Query( $args );
+		$the_query = new WP_Query( $args );
 
 			if ( $the_query->have_posts() ) :
 
-					while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-    				
-    				<h2><?php the_title(); ?></h2>
+					while ( $the_query->have_posts() ) : $the_query->the_post();
 
-				<?php endwhile;
+							if (get_field($acfStr)) :
+    				
+    						 	the_title(); 
+
+    						endif; 
+
+				endwhile;
 
 				wp_reset_postdata();
-
-			endif; 
 
 		endif;
 
