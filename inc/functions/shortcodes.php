@@ -109,7 +109,9 @@ function checkACFsc() {
 		$acfStr = "'" . $args['acf_field'] . "'";
 		$acfGet = "get_field(" . $acfStr . ")";
 
-		if ($acfGet):
+		if (!empty($acfGet)):
+
+			echo="foo";
 
 			$the_query = new WP_Query( $args );
 
