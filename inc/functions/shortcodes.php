@@ -95,19 +95,36 @@ function checkACFsc() {
 	add_shortcode('sitewideoffers', 'sitewideoffers');
 
 	// Conditional cards
-	// Add ACF field name to acf_field in shortcode eg [cond_cards acf_field="event_date"]
+	// Add ACF field name to acf_field and post type and number of pages in shortcode eg [cond_cards acf_field="event_date" post_type="events" posts_per_page=3]
 
 	function cond_cards($attributes) {
 
 		$args = shortcode_atts(array(
-			'acf_field' => ''
+			'acf_field' => '',
+			'post_type' => '',
+    		'posts_per_page' => ''
+
 	    ), $attributes);
 
 		$acfStr = "'" . $args['acf_field'] . "'";
 		$acfGet = "get_field(" . $acfStr . ")";
 
 		if ($acfGet):
-			echo "sum";
+
+			$the_query = new WP_Query( $args );
+
+			if ( $the_query->have_posts() ) :
+
+					while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+    				
+    				<h2><?php the_title(); ?></h2>
+
+				<?php endwhile;
+
+				wp_reset_postdata();
+
+			endif; 
+
 		endif;
 
 	};
@@ -115,4 +132,5 @@ function checkACFsc() {
 	add_shortcode('cond_cards', 'cond_cards');
 
 
-/* Check ACF END */ };
+/* Check ACF END */ 
+};
