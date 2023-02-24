@@ -34,7 +34,6 @@ add_action( 'acf/init', 'checkACFstyles' );
 function checkACFstyles() {
 
 	// Enqueue site type specific styles
-
 	function dynamic_style() {
 
 		if( get_field('sitetype', 'option') == 'eCommerce' ) {

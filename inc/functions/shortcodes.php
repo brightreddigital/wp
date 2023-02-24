@@ -5,10 +5,6 @@ add_action( 'acf/init', 'checkACFsc' );
 
 function checkACFsc() {
 
-	/* ----
-	Shortcodes 
-	----*/
-
 	// Social shortcode
 	function social() {
 		
@@ -97,5 +93,26 @@ function checkACFsc() {
 	}
 
 	add_shortcode('sitewideoffers', 'sitewideoffers');
+
+	// Conditional cards
+	// Add ACF field name to acf_field in shortcode eg [cond_cards acf_field="event_date"]
+
+	function cond_cards($attributes) {
+
+		$args = shortcode_atts(array(
+			'acf_field' => ''
+	    ), $attributes);
+
+		$acfStr = "'" . $args['acf_field'] . "'";
+		$acfGet = "get_field(" . $acfStr . ")";
+
+		if ($acfGet):
+			echo "sum";
+		endif;
+
+	};
+
+	add_shortcode('cond_cards', 'cond_cards');
+
 
 /* Check ACF END */ };
