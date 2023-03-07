@@ -149,8 +149,8 @@ function checkACFsc() {
 	    		<?php while( have_rows('testimonial_section') ) : the_row();
 	 
 	        	$itemOne = get_sub_field('repeater_list_item_one');
-	        	$itemTwo = get_sub_field('repeater_list_item_one');
-	        	$itemThree = get_sub_field('repeater_list_item_one'); ?>
+	        	$itemTwo = get_sub_field('repeater_list_item_two');
+	        	$itemThree = get_sub_field('repeater_list_item_three'); ?>
 
 	        	<li>
 	        		<span><?php if($itemOne): echo $itemOne; endif; ?></span>
