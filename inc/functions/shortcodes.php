@@ -95,7 +95,7 @@ function checkACFsc() {
 	add_shortcode('sitewideoffers', 'sitewideoffers');
 
 	// Conditional cards
-	// Add ACF field name to acf_field and post type and number of pages in shortcode eg [cond_cards acf_field="event_date" post_type="events" posts_per_page=3]
+	// Add ACF field name to acf_field and post type and number of pages in shortcode eg [cond_cards acf_field="event_date" post_type="events" posts_per_page="3"]
 
 	function cond_cards($attributes) {
 
@@ -131,6 +131,46 @@ function checkACFsc() {
 
 	add_shortcode('cond_cards', 'cond_cards');
 
+	// Repeater list
+
+	// Add class name to shortcode for custom CSS (found in theme CSS) eg [repeater_list class="previous-performances"]
+
+	function repeater_list($attributes) {
+
+		$args = shortcode_atts(array(
+			'class' => '',
+	    ), $attributes);
+
+ 
+		if( have_rows('repeater_list') ): ?>
+
+			<ul class="<?php $args['class']; ?>">
+	 
+	    		<?php while( have_rows('testimonial_section') ) : the_row();
+	 
+	        	$itemOne = get_sub_field('repeater_list_item_one');
+	        	$itemTwo = get_sub_field('repeater_list_item_one');
+	        	$itemThree = get_sub_field('repeater_list_item_one'); ?>
+
+	        	<li>
+	        		<span><?php if($itemOne): echo $itemOne; endif; ?></span>
+	        		<span><?php if($itemTwo): echo $itemTwo; endif; ?></span>
+	        		<span><?php if($itemThree): echo $itemThree; endif; ?></span>
+	        	</li>
+	    
+	    		<?php endwhile; ?>
+
+	    	</ul>	
+	 
+		<?php endif;
+
+	};
+
+	add_shortcode('repeater_list', 'repeater_list');
+
 
 /* Check ACF END */ 
 };
+
+
+
