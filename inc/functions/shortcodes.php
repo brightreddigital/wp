@@ -146,7 +146,7 @@ function checkACFsc() {
 
 			<ul class="<?php $args['class']; ?>">
 	 
-	    		<?php while( have_rows('testimonial_section') ) : the_row();
+	    		<?php while( have_rows('repeater_list') ) : the_row();
 	 
 	        	$itemOne = get_sub_field('repeater_list_item_one');
 	        	$itemTwo = get_sub_field('repeater_list_item_two');
