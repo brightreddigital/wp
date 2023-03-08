@@ -144,7 +144,7 @@ function checkACFsc() {
  
 		if( have_rows('repeater_list') ): ?>
 
-			<ul class="<?php $args['class']; ?>">
+			<ul class="repeater-list <?php $args['class']; ?>">
 	 
 	    		<?php while( have_rows('repeater_list') ) : the_row();
 	 
@@ -153,9 +153,9 @@ function checkACFsc() {
 	        	$itemThree = get_sub_field('repeater_list_item_three'); ?>
 
 	        	<li>
-	        		<span><?php if($itemOne): echo $itemOne; endif; ?></span>
-	        		<span><?php if($itemTwo): echo $itemTwo; endif; ?></span>
-	        		<span><?php if($itemThree): echo $itemThree; endif; ?></span>
+	        		<span class="repeater-item-one"><?php if($itemOne): echo $itemOne; endif; ?></span>
+	        		<span class="repeater-item-two"><?php if($itemTwo): echo $itemTwo; endif; ?></span>
+	        		<span class="repeater-item-three"><?php if($itemThree): echo $itemThree; endif; ?></span>
 	        	</li>
 	    
 	    		<?php endwhile; ?>
