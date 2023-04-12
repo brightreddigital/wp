@@ -1,25 +1,19 @@
 /* Typography */
 
-span:not(#wpadminbar span) {
-	font-family: var(--body-font):
-	font-weight: var(--body-weight);
-	color: var(--body-colour);
-}
-
 p:last-of-type {
-	margin-bottom: 0 !important ;
+	margin-bottom: 0 ;
 }
 
 p {
-	color: var(--body-colour) !important;
-	font-family: var(--body-font) !important;
-	font-weight: var(--body-weight) !important;
-	line-height: 1.5em !important;
+	color: var(--body-colour);
+	font-family: var(--body-font);
+	font-weight: var(--body-weight);
+	line-height: 1.5em;
 }
 
 a:not(#wpadminbar a){
-	font-family: var(--body-font) !important;
-	line-height: 1.5em !important;
+	font-family: var(--body-font);
+	line-height: 1.5em;
 }
 
 p a, p a:visited, .icon-text-inline {
@@ -35,7 +29,7 @@ h1 {
 	color: var(--h1-colour);
 	font-family: var(--h1-font) ;
 	font-weight: var(--h1-weight);
-	line-height: 1.1em !important;
+	line-height: 1.1em;
 }
 
 h2 {
