@@ -8,16 +8,16 @@ select {
 	width: 100%;
 	padding: 0.5em;
 	border: 1px solid var(--body-colour);
-	border-radius: 0px !important;
+	border-radius: 0px;
 	-webkit-transition: 0.35s ease-in-out;
 	-moz-transition: 0.35s ease-in-out;
 	-o-transition: 0.35s ease-in-out;
 	transition: 0.35s ease-in-out;
 	transition: all 0.35s ease-in-out;
-	font-family: var(--body-font) !important;
-	font-size: 14px !important;
-	font-weight: var(--body-weight) !important;
-	line-height: 1.4em !important;
+	font-family: var(--body-font);
+	font-size: 14px;
+	font-weight: var(--body-weight);
+	line-height: 1.4em;
 }
 
 @media screen and (min-width: 992px) {

@@ -354,7 +354,7 @@ h6 {
 
 p {
 	margin-bottom: 1.5em;
-	font-family: var(--body-font) !important;
+	font-family: var(--body-font);
 }
 
 dfn,
