@@ -18,7 +18,7 @@ N.B. This stylesheet is for Bright Red Theme only. Individual site content css c
 
 @import var(--import);
 @import 'inc/css/global/reset.css';
-/*@import 'inc/css/global/typography.css';*/
+@import 'inc/css/global/typography.css';
 @import 'inc/css/global/buttons.css';
 @import 'inc/css/global/icons.css';
 @import 'inc/css/global/forms.css';
