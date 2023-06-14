@@ -254,7 +254,7 @@ function checkACFtheme() {
 		'description' => '',
 		'show_in_rest' => 0,
 	) );
-} );
+}
 
 add_action('acf/init', 'my_acf_add_local_field_groups');
 
