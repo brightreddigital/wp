@@ -61,7 +61,6 @@ function my_acf_add_local_field_groups() {
         'append' => '',
         'maxlength' => '',
       ),
-      1 => 
       array (
         'key' => 'field_62e3b239043f5',
         'label' => 'Site Tagline',
@@ -83,7 +82,6 @@ function my_acf_add_local_field_groups() {
         'append' => '',
         'maxlength' => '',
       ),
-      2 => 
       array (
         'key' => 'field_62e7b44addb54',
         'label' => 'Address',
@@ -105,7 +103,6 @@ function my_acf_add_local_field_groups() {
         'rows' => '',
         'new_lines' => 'br',
       ),
-      3 => 
       array (
         'key' => 'field_62e7b45f5e567',
         'label' => 'Phone',
@@ -127,7 +124,6 @@ function my_acf_add_local_field_groups() {
         'append' => '',
         'maxlength' => '',
       ),
-      4 => 
       array (
         'key' => 'field_62e7b47837256',
         'label' => 'Email Address',
