@@ -164,8 +164,8 @@ function my_acf_add_local_field_groups() {
     'description' => '',
     'show_in_rest' => 0,
   ),
- ),
-};
+ );
+}
 
 	// Change Site Title, Descriptions and Email 
 
