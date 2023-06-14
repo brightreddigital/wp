@@ -34,140 +34,127 @@ function checkACFtheme() {
 	));
 
 	// Add fields to theme options
-function my_acf_add_local_field_groups() {
+	add_action( 'acf/include_fields', function() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
 
- acf_add_local_field_group( array (
-    'key' => 'group_62e7b41297b52',
-    'title' => 'Details',
-    'fields' => array (
-      array (
-        'key' => 'field_62e3b113a5bab',
-        'label' => 'Site Title',
-        'name' => 'site_title',
-        'aria-label' => '',
-        'type' => 'text',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => 
-        array (
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-      ),
-      array (
-        'key' => 'field_62e3b239043f5',
-        'label' => 'Site Tagline',
-        'name' => 'tagline',
-        'aria-label' => '',
-        'type' => 'text',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => 
-        array (
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-      ),
-      array (
-        'key' => 'field_62e7b44addb54',
-        'label' => 'Address',
-        'name' => 'address',
-        'aria-label' => '',
-        'type' => 'textarea',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => 
-        array (
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'default_value' => '',
-        'placeholder' => '',
-        'maxlength' => '',
-        'rows' => '',
-        'new_lines' => 'br',
-      ),
-      array (
-        'key' => 'field_62e7b45f5e567',
-        'label' => 'Phone',
-        'name' => 'phone',
-        'aria-label' => '',
-        'type' => 'text',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => 
-        array (
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-      ),
-      array (
-        'key' => 'field_62e7b47837256',
-        'label' => 'Email Address',
-        'name' => 'email_address',
-        'aria-label' => '',
-        'type' => 'email',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => 
-        array (
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-      ),
-    ),
-    'location' => array (
-      array (
-        array (
-          'param' => 'options_page',
-          'operator' => '==',
-          'value' => 'theme-general-settings',
-        ),
-      ),
-    ),
-    'menu_order' => 0,
-    'position' => 'normal',
-    'style' => 'default',
-    'label_placement' => 'top',
-    'instruction_placement' => 'label',
-    'hide_on_screen' => '',
-    'active' => true,
-    'description' => '',
-    'show_in_rest' => 0,
-  ),
- );
-}
+	acf_add_local_field_group( array(
+		'key' => 'group_62e7b2a64acc9',
+		'title' => 'Brand Colours',
+		'fields' => array(
+			array(
+				'key' => 'field_62e7b2b662265',
+				'label' => 'Primary Colour',
+				'name' => 'primary_colour',
+				'aria-label' => '',
+				'type' => 'color_picker',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '#000000',
+				'enable_opacity' => 0,
+				'return_format' => 'string',
+			),
+			array(
+				'key' => 'field_62e7b2fb62266',
+				'label' => 'Second Colour',
+				'name' => 'second_colour',
+				'aria-label' => '',
+				'type' => 'color_picker',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '#000000',
+				'enable_opacity' => 0,
+				'return_format' => 'string',
+			),
+			array(
+				'key' => 'field_62e7b31462267',
+				'label' => 'Third Colour',
+				'name' => 'third_colour',
+				'aria-label' => '',
+				'type' => 'color_picker',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '#000000',
+				'enable_opacity' => 0,
+				'return_format' => 'string',
+			),
+			array(
+				'key' => 'field_62e7b33b62268',
+				'label' => 'Dark Colour',
+				'name' => 'dark_colour',
+				'aria-label' => '',
+				'type' => 'color_picker',
+				'instructions' => 'Should be same as primary brand colour if legible. Needs to work with white text overlaid.',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '#000000',
+				'enable_opacity' => 0,
+				'return_format' => 'string',
+			),
+			array(
+				'key' => 'field_62ea3e6c4db39',
+				'label' => 'Light Colour',
+				'name' => 'light_colour',
+				'aria-label' => '',
+				'type' => 'color_picker',
+				'instructions' => 'Used for tinted backgrounds. Should be approx 0.1 (10%) to 0.15 (15%) of brand colour.',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'enable_opacity' => 1,
+				'return_format' => 'string',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'options_page',
+					'operator' => '==',
+					'value' => 'theme-general-settings',
+				),
+			),
+		),
+		'menu_order' => 2,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+		'show_in_rest' => 0,
+	) );
+} );
 
-add_action('acf/init', 'my_acf_add_local_field_groups');
 
 	// Change Site Title, Descriptions and Email 
 
