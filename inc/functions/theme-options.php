@@ -167,6 +167,8 @@ function my_acf_add_local_field_groups() {
  );
 }
 
+add_action('acf/init', 'my_acf_add_local_field_groups');
+
 	// Change Site Title, Descriptions and Email 
 
 	add_action('acf/init', 'siteDetails'); 
