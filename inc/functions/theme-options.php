@@ -35,7 +35,110 @@ function checkACFtheme() {
 
 	// Add fields to theme options
 	
-	add_action( 'acf/init', function() {
+
+
+	// Change Site Title, Descriptions and Email 
+
+	add_action('acf/init', 'siteDetails'); 
+	add_action('acf/init', 'dynamic_style'); 
+
+	function siteDetails() {
+
+		$sitetitle = get_field('site_title', 'option');   
+
+		if ($sitetitle) {
+			update_option('blogname', $sitetitle);
+		} else {
+			update_option( 'blogname', '' );  
+		}
+
+		$tagline = get_field('tagline', 'option');    
+
+		if ($tagline) {
+			update_option('blogdescription', $tagline);
+		} else {
+			update_option( 'blogdescription', '' ); 
+		}
+
+		$adminemail = get_field('admin_email', 'option');   
+
+			if ($adminemail) {
+				update_option('admin_email', $adminemail);
+			} else {
+				update_option( 'admin_email', '' ); 
+			}
+
+	}
+
+	// Custom post types 
+
+	function create_posttype() {
+
+		if( have_rows('post_type', 'option') ):
+
+			while( have_rows('post_type','option') ) : the_row();
+
+				$labels = array(
+					'name'                => __( get_sub_field('pt_name','options') ),
+					'singular_name'       => __( get_sub_field('pt_singular','options') ),
+					'menu_name'           => __( get_sub_field('pt_name','options') ),
+					'parent_item_colon'   => __( 'Parent ' . get_sub_field('pt_singular','options') ),
+					'all_items'           => __( 'All ' . get_sub_field('pt_name','options') ),
+					'view_item'           => __( 'View ' . get_sub_field('pt_singular','options') ),
+					'add_new_item'        => __( 'Add New ' . get_sub_field('pt_singular','options') ),
+					'add_new'             => __( 'Add New ' . get_sub_field('pt_singular','options') ),
+					'edit_item'           => __( 'Edit ' . get_sub_field('pt_singular','options') ),
+					'update_item'         => __( 'Update ' . get_sub_field('pt_singular','options') ),
+					'search_items'        => __( 'Search ' . get_sub_field('pt_singular','options') ),
+					'not_found'           => __( 'Not Found' ),
+					'not_found_in_trash'  => __( 'Not found in Trash' ),
+				);
+
+				$args = array(
+					'label'               => __( get_sub_field('pt_slug','options') ),
+					'labels'              => $labels,
+					'supports'            => array( 'title', 'excerpt', 'author', 'editor', 'comments', 'thumbnail', 'revisions', ),
+					'taxonomies'          => array( 'category', 'post_tag' ),
+					'hierarchical'        => false,
+					'public'              => true,
+					'show_ui'             => true,
+					'show_in_menu'        => true,
+					'show_in_nav_menus'   => true,
+					'show_in_admin_bar'   => true,
+					'menu_position'       => 5,
+					'can_export'          => true,
+					'has_archive'         => ( get_sub_field('pt_archive','options') ),
+					'exclude_from_search' => ( get_sub_field('pt_search','options') ),
+					'publicly_queryable'  => ( get_sub_field('pt_public','options') ),
+					'capability_type'     => 'post',
+					'show_in_rest' => true,
+					'menu_icon' => ( get_sub_field('pt_icon','options') ),
+				);
+
+				register_post_type( get_sub_field('pt_slug','options'), $args );
+
+			endwhile;
+
+		endif;
+
+	}
+	
+	add_action( 'init', 'create_posttype' );
+
+	// Add favicion link to <head>
+
+	function add_favicon(){ ?>
+
+		<link rel="icon" type="image/png" href="<?php echo the_field('favicon', 'option'); ?>">
+		<link rel="shortcut icon" type="image/png" href="<?php echo the_field('favicon', 'option'); ?>">
+		<link rel="apple-touch-icon" type="image/png" href="<?php echo the_field('favicon', 'option'); ?>">
+		<link rel="apple-touch-icon-precomposed" type="image/png" href="<?php echo the_field('favicon', 'option'); ?>">
+
+	<?php }
+
+	add_action('wp_head','add_favicon');
+
+	add_action( 'acf/include_fields', function() {
 	
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
 		return;
@@ -157,107 +260,6 @@ function checkACFtheme() {
 	) );
 } );
 
-
-	// Change Site Title, Descriptions and Email 
-
-	add_action('acf/init', 'siteDetails'); 
-	add_action('acf/init', 'dynamic_style'); 
-
-	function siteDetails() {
-
-		$sitetitle = get_field('site_title', 'option');   
-
-		if ($sitetitle) {
-			update_option('blogname', $sitetitle);
-		} else {
-			update_option( 'blogname', '' );  
-		}
-
-		$tagline = get_field('tagline', 'option');    
-
-		if ($tagline) {
-			update_option('blogdescription', $tagline);
-		} else {
-			update_option( 'blogdescription', '' ); 
-		}
-
-		$adminemail = get_field('admin_email', 'option');   
-
-			if ($adminemail) {
-				update_option('admin_email', $adminemail);
-			} else {
-				update_option( 'admin_email', '' ); 
-			}
-
-	}
-
-	// Custom post types 
-
-	function create_posttype() {
-
-		if( have_rows('post_type', 'option') ):
-
-			while( have_rows('post_type','option') ) : the_row();
-
-				$labels = array(
-					'name'                => __( get_sub_field('pt_name','options') ),
-					'singular_name'       => __( get_sub_field('pt_singular','options') ),
-					'menu_name'           => __( get_sub_field('pt_name','options') ),
-					'parent_item_colon'   => __( 'Parent ' . get_sub_field('pt_singular','options') ),
-					'all_items'           => __( 'All ' . get_sub_field('pt_name','options') ),
-					'view_item'           => __( 'View ' . get_sub_field('pt_singular','options') ),
-					'add_new_item'        => __( 'Add New ' . get_sub_field('pt_singular','options') ),
-					'add_new'             => __( 'Add New ' . get_sub_field('pt_singular','options') ),
-					'edit_item'           => __( 'Edit ' . get_sub_field('pt_singular','options') ),
-					'update_item'         => __( 'Update ' . get_sub_field('pt_singular','options') ),
-					'search_items'        => __( 'Search ' . get_sub_field('pt_singular','options') ),
-					'not_found'           => __( 'Not Found' ),
-					'not_found_in_trash'  => __( 'Not found in Trash' ),
-				);
-
-				$args = array(
-					'label'               => __( get_sub_field('pt_slug','options') ),
-					'labels'              => $labels,
-					'supports'            => array( 'title', 'excerpt', 'author', 'editor', 'comments', 'thumbnail', 'revisions', ),
-					'taxonomies'          => array( 'category', 'post_tag' ),
-					'hierarchical'        => false,
-					'public'              => true,
-					'show_ui'             => true,
-					'show_in_menu'        => true,
-					'show_in_nav_menus'   => true,
-					'show_in_admin_bar'   => true,
-					'menu_position'       => 5,
-					'can_export'          => true,
-					'has_archive'         => ( get_sub_field('pt_archive','options') ),
-					'exclude_from_search' => ( get_sub_field('pt_search','options') ),
-					'publicly_queryable'  => ( get_sub_field('pt_public','options') ),
-					'capability_type'     => 'post',
-					'show_in_rest' => true,
-					'menu_icon' => ( get_sub_field('pt_icon','options') ),
-				);
-
-				register_post_type( get_sub_field('pt_slug','options'), $args );
-
-			endwhile;
-
-		endif;
-
-	}
-	
-	add_action( 'init', 'create_posttype' );
-
-	// Add favicion link to <head>
-
-	function add_favicon(){ ?>
-
-		<link rel="icon" type="image/png" href="<?php echo the_field('favicon', 'option'); ?>">
-		<link rel="shortcut icon" type="image/png" href="<?php echo the_field('favicon', 'option'); ?>">
-		<link rel="apple-touch-icon" type="image/png" href="<?php echo the_field('favicon', 'option'); ?>">
-		<link rel="apple-touch-icon-precomposed" type="image/png" href="<?php echo the_field('favicon', 'option'); ?>">
-
-	<?php }
-
-	add_action('wp_head','add_favicon');
 
 // Check ACF END
 };
