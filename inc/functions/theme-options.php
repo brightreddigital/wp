@@ -33,6 +33,144 @@ function checkACFtheme() {
 		'parent_slug' => 'theme-general-settings',
 	));
 
+	// Add fields to theme options
+function my_acf_add_local_field_groups() {
+
+ acf_add_local_field_group( array (
+    'key' => 'group_62e7b41297b52',
+    'title' => 'Details',
+    'fields' => array (
+      array (
+        'key' => 'field_62e3b113a5bab',
+        'label' => 'Site Title',
+        'name' => 'site_title',
+        'aria-label' => '',
+        'type' => 'text',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => 
+        array (
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => '',
+      ),
+      1 => 
+      array (
+        'key' => 'field_62e3b239043f5',
+        'label' => 'Site Tagline',
+        'name' => 'tagline',
+        'aria-label' => '',
+        'type' => 'text',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => 
+        array (
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => '',
+      ),
+      2 => 
+      array (
+        'key' => 'field_62e7b44addb54',
+        'label' => 'Address',
+        'name' => 'address',
+        'aria-label' => '',
+        'type' => 'textarea',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => 
+        array (
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'maxlength' => '',
+        'rows' => '',
+        'new_lines' => 'br',
+      ),
+      3 => 
+      array (
+        'key' => 'field_62e7b45f5e567',
+        'label' => 'Phone',
+        'name' => 'phone',
+        'aria-label' => '',
+        'type' => 'text',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => 
+        array (
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => '',
+      ),
+      4 => 
+      array (
+        'key' => 'field_62e7b47837256',
+        'label' => 'Email Address',
+        'name' => 'email_address',
+        'aria-label' => '',
+        'type' => 'email',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => 
+        array (
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+      ),
+    ),
+    'location' => array (
+      array (
+        array (
+          'param' => 'options_page',
+          'operator' => '==',
+          'value' => 'theme-general-settings',
+        ),
+      ),
+    ),
+    'menu_order' => 0,
+    'position' => 'normal',
+    'style' => 'default',
+    'label_placement' => 'top',
+    'instruction_placement' => 'label',
+    'hide_on_screen' => '',
+    'active' => true,
+    'description' => '',
+    'show_in_rest' => 0,
+  ),
+ ),
+};
+
 	// Change Site Title, Descriptions and Email 
 
 	add_action('acf/init', 'siteDetails'); 
