@@ -138,7 +138,10 @@ function checkACFtheme() {
 
 	add_action('wp_head','add_favicon');
 
-	function my_acf_add_local_field_groups() {
+// Check ACF END
+};
+
+function my_acf_add_local_field_groups() {
 
 	acf_add_local_field_group( array(
 		'key' => 'group_62e7b2a64acc9',
@@ -257,6 +260,3 @@ function checkACFtheme() {
 }
 
 add_action('acf/init', 'my_acf_add_local_field_groups');
-
-// Check ACF END
-};
